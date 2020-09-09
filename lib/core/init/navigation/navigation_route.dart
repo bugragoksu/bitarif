@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../screen/authenticate/auth/view/auth_view.dart';
 import '../../constants/navigation/navigation_constants.dart';
 
 class NavigationRoute {
@@ -10,8 +11,8 @@ class NavigationRoute {
 
   Route<dynamic> generateRoute(args) {
     switch (args.name) {
-      case NavigationConstants.TEST_VIEW:
-        return normalNavigate(Scaffold());
+      case NavigationConstants.AUTH_VIEW:
+        return normalNavigate(AuthView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());

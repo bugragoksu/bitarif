@@ -4,7 +4,6 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../base/model/IBaseModel.dart';
 import '../../base/model/base_error.dart';
 import '../../base/model/base_model.dart';
 import '../../constants/enums/http_types_enum.dart';

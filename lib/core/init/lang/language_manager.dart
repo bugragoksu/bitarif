@@ -12,5 +12,5 @@ class LanguageManager {
   final enLocale = Locale("en", "US");
   final trLocale = Locale("tr", "TR");
 
-  List<Locale> get supportedLocales => [enLocale, trLocale];
+  List<Locale> get supportedLocales => [trLocale, enLocale];
 }

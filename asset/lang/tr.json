@@ -1,3 +1,11 @@
 {
-    "welcome": "Hoşgeldiniz"
+    "signIn": "Giriş Yap",
+    "signUp": "Kayıt Ol",
+    "email": "Email",
+    "password": "Şifre",
+    "forgotPassword": "Şifremi Unuttum",
+    "login": "Giriş Yap",
+    "or": "- veya -",
+    "signInWith": " ",
+    "dontHaveAccount": "Hesabın yok mu? "
 }

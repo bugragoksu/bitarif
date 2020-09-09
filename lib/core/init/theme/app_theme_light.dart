@@ -21,7 +21,7 @@ class AppThemeLight {
         primary: Color(0xff424242),
         primaryVariant: Colors.black,
         secondary: Color(0xffff2164),
-        secondaryVariant: Color(0xffff2150),
+        secondaryVariant: Color(0xffff893d),
         surface: Colors.white70,
         background: Colors.white,
         error: Colors.red[900],

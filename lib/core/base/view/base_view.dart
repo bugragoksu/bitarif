@@ -9,21 +9,23 @@ class BaseView<T extends Store> extends StatefulWidget {
 
   const BaseView(
       {Key key,
-      this.onPageBuilder,
-      this.viewModel,
+      @required this.viewModel,
+      @required this.onPageBuilder,
       this.onModelReady,
       this.onDispose})
       : super(key: key);
 
   @override
-  _BaseViewState createState() => _BaseViewState();
+  _BaseViewState<T> createState() => _BaseViewState<T>();
 }
 
-class _BaseViewState extends State<BaseView> {
+class _BaseViewState<T extends Store> extends State<BaseView<T>> {
+  T model;
   @override
   void initState() {
+    model = widget.viewModel;
+    widget.onModelReady(model);
     super.initState();
-    if (widget.onModelReady != null) widget.onModelReady(widget.viewModel);
   }
 
   @override
@@ -34,6 +36,6 @@ class _BaseViewState extends State<BaseView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return widget.onPageBuilder(context, widget.viewModel);
   }
 }
