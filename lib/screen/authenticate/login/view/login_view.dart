@@ -1,3 +1,5 @@
+import '../../../../core/constants/navigation/navigation_constants.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/view/base_view.dart';
@@ -65,7 +67,10 @@ class _LoginViewState extends State<LoginView> {
         buildForm,
         ForgotPasswordButton(),
         LoginButton(
-          onCompleted: (String errorMessage) {},
+          onCompleted: (String errorMessage) {
+            NavigationManager.instance
+                .navigateToPageClear(path: NavigationConstants.MAIN_VIEW);
+          },
         ),
         _buildSignInWithText,
         _buildSocialBtnRow,

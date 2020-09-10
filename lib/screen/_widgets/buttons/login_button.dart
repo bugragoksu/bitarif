@@ -16,8 +16,17 @@ class _LoginButtonState extends State<LoginButton> {
   Widget build(BuildContext context) {
     return SignButton(
       isLoading: isLoading,
-      onPressed: () {},
+      onPressed: () async {
+        changeLoading();
+        await Future.delayed(Duration(seconds: 2));
+        changeLoading();
+        widget.onCompleted("");
+      },
       title: "login",
     );
   }
+
+  changeLoading() => setState(() {
+        isLoading = !isLoading;
+      });
 }

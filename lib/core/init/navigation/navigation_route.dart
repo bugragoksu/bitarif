@@ -1,7 +1,8 @@
-import 'package:bitarif/screen/authenticate/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
+import '../../../screen/authenticate/splash/view/splash_view.dart';
+import '../../../screen/main/main_view.dart';
 import '../../constants/navigation/navigation_constants.dart';
 
 class NavigationRoute {
@@ -17,6 +18,9 @@ class NavigationRoute {
         break;
       case NavigationConstants.SPLASH_VIEW:
         return normalNavigate(SplashView());
+        break;
+      case NavigationConstants.MAIN_VIEW:
+        return normalNavigate(MainView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());
