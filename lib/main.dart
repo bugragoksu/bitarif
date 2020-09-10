@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
         onGenerateRoute: NavigationRoute.instance.generateRoute,
-        initialRoute: NavigationConstants.AUTH_VIEW,
+        initialRoute: NavigationConstants.SPLASH_VIEW,
         navigatorKey: NavigationManager.instance.navigatorKey);
   }
 }

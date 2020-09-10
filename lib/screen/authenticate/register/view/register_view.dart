@@ -1,5 +1,3 @@
-import '../../../_widgets/buttons/register_button.dart';
-import '../../../_widgets/fields/auth_text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
@@ -7,6 +5,8 @@ import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/body_column.dart';
 import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../_widgets/buttons/register_button.dart';
+import '../../../_widgets/fields/auth_text_field.dart';
 import '../viewmodel/register_view_model.dart';
 
 class RegisterView extends StatefulWidget {

@@ -1,8 +1,8 @@
-import '../../../../core/components/text/link_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/body_column.dart';
+import '../../../../core/components/text/link_text.dart';
 import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../_widgets/buttons/facebook_sign_button.dart';

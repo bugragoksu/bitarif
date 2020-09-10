@@ -1,3 +1,4 @@
+import 'package:bitarif/screen/authenticate/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
@@ -13,6 +14,9 @@ class NavigationRoute {
     switch (args.name) {
       case NavigationConstants.AUTH_VIEW:
         return normalNavigate(AuthView());
+        break;
+      case NavigationConstants.SPLASH_VIEW:
+        return normalNavigate(SplashView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());

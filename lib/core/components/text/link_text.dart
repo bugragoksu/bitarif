@@ -1,5 +1,6 @@
-import 'package:bitarif/core/components/text/locale_text.dart';
 import 'package:flutter/material.dart';
+
+import 'locale_text.dart';
 
 class LinkText extends StatelessWidget {
   final String url;
