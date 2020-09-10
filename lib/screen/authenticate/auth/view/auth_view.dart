@@ -1,3 +1,4 @@
+import '../../register/view/register_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
@@ -43,6 +44,7 @@ class _AuthViewState extends BaseState<AuthView> {
 
   Scaffold get buildScaffold => Scaffold(
       body: PageView.builder(
+          controller: _controller,
           onPageChanged: (value) {
             setState(() {
               authViewModel.changePage(value);
@@ -53,16 +55,22 @@ class _AuthViewState extends BaseState<AuthView> {
           itemBuilder: (context, index) => buildPage));
 
   Widget get buildPage => authViewModel.currentPageIndex == 0
-      ? LoginView()
-      : Container(
-          color: Colors.red,
-        );
+      ? LoginView(
+          goToRegister: () => goToRegister(),
+        )
+      : RegisterView(goToLogin: () => goToLogin());
 
-  void goToLogin() => setState(() {
-        authViewModel.changePage(0);
-      });
+  goToLogin() {
+    setState(() {
+      _controller.animateToPage(0,
+          duration: 400.toMillisDuration, curve: Curves.easeIn);
+    });
+  }
 
-  void goToRegister() => setState(() {
-        authViewModel.changePage(1);
-      });
+  goToRegister() {
+    setState(() {
+      _controller.animateToPage(1,
+          duration: 400.toMillisDuration, curve: Curves.easeIn);
+    });
+  }
 }

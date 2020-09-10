@@ -1,17 +1,22 @@
+import '../../../../core/components/text/link_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/components/button/login_button.dart';
 import '../../../../core/components/column/body_column.dart';
 import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../_widgets/buttons/facebook_sign_button.dart';
 import '../../../_widgets/buttons/forgot_password_button.dart';
 import '../../../_widgets/buttons/google_sign_button.dart';
+import '../../../_widgets/buttons/login_button.dart';
 import '../../../_widgets/fields/auth_text_field.dart';
 import '../viewmodel/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
+  final VoidCallback goToRegister;
+
+  const LoginView({Key key, @required this.goToRegister}) : super(key: key);
+
   @override
   _LoginViewState createState() => _LoginViewState();
 }
@@ -60,12 +65,15 @@ class _LoginViewState extends State<LoginView> {
         buildForm,
         ForgotPasswordButton(),
         LoginButton(
-          isLoading: false,
-          onPresed: () {},
+          onCompleted: (String errorMessage) {},
         ),
         _buildSignInWithText,
         _buildSocialBtnRow,
         _buildSignupBtn,
+        SizedBox(
+          height: context.mediumValue,
+        ),
+        _buildTermsText
       ],
     );
   }
@@ -121,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
       );
 
   Widget get _buildSignupBtn => GestureDetector(
-        onTap: () => print('Sign Up Button Pressed'),
+        onTap: () => widget.goToRegister(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -141,5 +149,22 @@ class _LoginViewState extends State<LoginView> {
             ),
           ],
         ),
+      );
+
+  Widget get _buildTermsText => Align(
+        alignment: FractionalOffset.bottomCenter,
+        child: Container(
+            child: Column(children: <Widget>[
+          LocaleText(value: "agreeTo"),
+          LinkText(
+            url: "https://humabreath.com/tos.html",
+            title: "terms",
+          ),
+          LocaleText(value: "and"),
+          LinkText(
+            url: "https://humabreath.com/privacy.html",
+            title: "privacy",
+          ),
+        ])),
       );
 }

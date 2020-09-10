@@ -4,12 +4,16 @@ import '../../extensions/context_extension.dart';
 import '../circular_progress.dart';
 import '../text/locale_text.dart';
 
-class LoginButton extends StatelessWidget {
+class SignButton extends StatelessWidget {
   final bool isLoading;
-  final VoidCallback onPresed;
+  final VoidCallback onPressed;
+  final String title;
 
-  const LoginButton(
-      {Key key, @required this.isLoading, @required this.onPresed})
+  const SignButton(
+      {Key key,
+      @required this.isLoading,
+      @required this.onPressed,
+      @required this.title})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class LoginButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         elevation: 5.0,
-        onPressed: this.onPresed,
+        onPressed: this.onPressed,
         child: Container(
           width: context.width / 2,
           height: context.mediumPlusValue,
@@ -43,7 +47,7 @@ class LoginButton extends StatelessWidget {
                   ),
                 )
               : LocaleText(
-                  value: "login",
+                  value: title,
                   style: TextStyle(
                     color: Colors.white,
                   )),

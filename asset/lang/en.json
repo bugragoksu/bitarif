@@ -2,10 +2,17 @@
     "signIn": "Sign in",
     "signUp": "Sign Up",
     "email": "Email",
+    "name": "Name",
     "password": "Password",
     "forgotPassword": "Forgot Password?",
     "login": "Login",
+    "register": "Register",
     "or": "- OR -",
     "signInWith": "Sign in with",
-    "dontHaveAccount": "Don't have an Account? "
+    "dontHaveAccount": "Don't have an Account? ",
+    "haveAccount": "Already register? ",
+    "agreeTo": "By signing up you agree to ",
+    "terms": "the terms of service ",
+    "privacy": "privacy policy.",
+    "and": "and "
 }
