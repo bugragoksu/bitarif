@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/extensions/int_extensions.dart';
+import '../../../../core/extensions/int_extension.dart';
 import '../../login/view/login_view.dart';
 import '../../register/view/register_view.dart';
 import '../viewmodel/auth_view_model.dart';

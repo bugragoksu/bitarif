@@ -45,7 +45,7 @@ class _RegisterViewState extends BaseState<RegisterView> {
             child: SingleChildScrollView(child: buildBodyColumn)),
       );
 
-  Widget get buildBodyColumn => BodyColumn(
+  Widget get buildBodyColumn => AuthBodyColumn(
         children: [
           LocaleText(
             value: 'signUp',

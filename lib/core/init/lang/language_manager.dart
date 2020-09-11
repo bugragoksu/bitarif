@@ -7,7 +7,19 @@ class LanguageManager {
     return _instance;
   }
 
-  LanguageManager._init();
+  Locale _currentLocale;
+  LanguageManager._init() {
+    _currentLocale = trLocale;
+  }
+
+  Locale changeLocale() {
+    if (_currentLocale == trLocale) {
+      _currentLocale = enLocale;
+    } else {
+      _currentLocale = trLocale;
+    }
+    return _currentLocale;
+  }
 
   final enLocale = Locale("en", "US");
   final trLocale = Locale("tr", "TR");

@@ -30,7 +30,8 @@ class CodegenLoader extends AssetLoader{
   "agreeTo": "By signing up you agree to ",
   "terms": "the terms of service ",
   "privacy": "privacy policy.",
-  "and": "and "
+  "and": "and ",
+  "welcome": "Welcome"
 };
 static const Map<String,dynamic> tr = {
   "signIn": "Giriş Yap",
@@ -48,7 +49,8 @@ static const Map<String,dynamic> tr = {
   "agreeTo": "Giriş yaparak kabul etmiş olursunuz :",
   "terms": "Kullanım Şartları ",
   "privacy": "Gizlilik Sözleşmesi.",
-  "and": "ve "
+  "and": "ve ",
+  "welcome": "Hoşgeldin"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "tr": tr};
 }

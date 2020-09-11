@@ -3,6 +3,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../core/base/state/base_state.dart';
 import '../_widgets/bottom_bar/bottom_bar.dart';
+import 'home/view/home_view.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -23,10 +24,7 @@ class _MainViewState extends BaseState<MainView> {
   @override
   void initState() {
     pages = [
-      Container(
-        color: Colors.red,
-        key: _homeKey,
-      ),
+      HomeView(key: _homeKey),
       Container(
         color: Colors.green,
         key: _searchKey,

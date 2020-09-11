@@ -1,12 +1,15 @@
-import '../../../../core/constants/navigation/navigation_constants.dart';
-import '../../../../core/init/navigation/navigation_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/body_column.dart';
 import '../../../../core/components/text/link_text.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/lang/language_manager.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/buttons/facebook_sign_button.dart';
 import '../../../_widgets/buttons/forgot_password_button.dart';
 import '../../../_widgets/buttons/google_sign_button.dart';
@@ -52,7 +55,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget buildBodyColumn(BuildContext context) {
-    return BodyColumn(
+    return AuthBodyColumn(
       children: [
         LocaleText(
           value: 'signIn',
@@ -78,7 +81,20 @@ class _LoginViewState extends State<LoginView> {
         SizedBox(
           height: context.mediumValue,
         ),
-        _buildTermsText
+        _buildTermsText,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Spacer(),
+            IconButton(
+              color: context.theme.colorScheme.primary,
+              icon: Icon(FeatherIcons.globe),
+              onPressed: () {
+                context.locale = LanguageManager.instance.changeLocale();
+              },
+            )
+          ],
+        ),
       ],
     );
   }
