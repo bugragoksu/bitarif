@@ -1,3 +1,4 @@
+import 'profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -33,10 +34,7 @@ class _MainViewState extends BaseState<MainView> {
         color: Colors.yellow,
         key: _favoriteKey,
       ),
-      Container(
-        color: Colors.blue,
-        key: _profileKey,
-      )
+      ProfileView(key: _profileKey)
     ];
     currentPage = pages[0];
     selectedIcon = iconList[0];

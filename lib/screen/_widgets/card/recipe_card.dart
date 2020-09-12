@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../../core/components/card/stack_image_card.dart';
 import '../../../core/extensions/context_extension.dart';

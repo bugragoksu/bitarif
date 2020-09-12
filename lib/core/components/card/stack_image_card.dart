@@ -35,7 +35,7 @@ class StackImageCard extends StatelessWidget {
                         image: isNetwork
                             ? NetworkImage(path)
                             : AssetImage(path)))),
-            child,
+            child ?? Container(),
           ],
         ),
       ),
