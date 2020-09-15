@@ -31,7 +31,8 @@ class CodegenLoader extends AssetLoader{
   "terms": "the terms of service ",
   "privacy": "privacy policy.",
   "and": "and ",
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "favList": "Favourites"
 };
 static const Map<String,dynamic> tr = {
   "signIn": "Giriş Yap",
@@ -50,7 +51,8 @@ static const Map<String,dynamic> tr = {
   "terms": "Kullanım Şartları ",
   "privacy": "Gizlilik Sözleşmesi.",
   "and": "ve ",
-  "welcome": "Hoşgeldin"
+  "welcome": "Hoşgeldin",
+  "favList": "Favoriler"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "tr": tr};
 }

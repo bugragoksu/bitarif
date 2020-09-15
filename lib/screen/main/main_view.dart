@@ -1,3 +1,5 @@
+import 'package:bitarif/screen/main/favourite/view/favourite_view.dart';
+
 import 'profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -15,7 +17,7 @@ class _MainViewState extends BaseState<MainView> {
   final PageStorageBucket bucket = PageStorageBucket();
   final Key _homeKey = PageStorageKey('homeView');
   final Key _searchKey = PageStorageKey('searchView');
-  final Key _favoriteKey = PageStorageKey('favoriveView');
+  final Key _favouriteKey = PageStorageKey('favouriteView');
   final Key _profileKey = PageStorageKey('profileView');
 
   List<Widget> pages;
@@ -30,9 +32,8 @@ class _MainViewState extends BaseState<MainView> {
         color: Colors.green,
         key: _searchKey,
       ),
-      Container(
-        color: Colors.yellow,
-        key: _favoriteKey,
+      FavouriteView(
+        key: _favouriteKey,
       ),
       ProfileView(key: _profileKey)
     ];
