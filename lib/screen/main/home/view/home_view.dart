@@ -49,6 +49,8 @@ class _HomeViewState extends BaseState<HomeView> {
           child: LowPaddingColumn(
             children: [
               _buildTitle,
+              context.lowValue.toHeightSizedBox,
+              ColoredGradientDivider(),
               context.normalValue.toHeightSizedBox,
               BodyTitleText(
                 text: "getInspired",
@@ -68,39 +70,32 @@ class _HomeViewState extends BaseState<HomeView> {
         ),
       );
 
-  Widget get _buildTitle => Column(
-        children: [
-          Row(children: [
-            context.lowValue.toHeightSizedBox,
-            LocaleText(
-              value: 'welcome',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: context.normalValue * 1.25,
-                  color: context.theme.colorScheme.primaryVariant),
-            ),
-            SizedBox(
-              width: context.normalValue,
-            ),
-            LocaleText(
-              value: 'Buğra',
-              style: TextStyle(
-                  fontSize: context.normalValue * 1.25,
-                  color: context.theme.colorScheme.primary),
-            ),
-            Spacer(),
-            IconButton(
-              color: context.theme.colorScheme.primary,
-              icon: Icon(FeatherIcons.globe),
-              onPressed: () {
-                context.locale = LanguageManager.instance.changeLocale();
-              },
-            )
-          ]),
-          context.lowValue.toHeightSizedBox,
-          ColoredGradientDivider()
-        ],
-      );
+  Widget get _buildTitle => Row(children: [
+        LocaleText(
+          value: 'welcome',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: context.normalValue * 1.25,
+              color: context.theme.colorScheme.primaryVariant),
+        ),
+        SizedBox(
+          width: context.normalValue,
+        ),
+        LocaleText(
+          value: 'Buğra',
+          style: TextStyle(
+              fontSize: context.normalValue * 1.25,
+              color: context.theme.colorScheme.primary),
+        ),
+        Spacer(),
+        IconButton(
+          color: context.theme.colorScheme.primary,
+          icon: Icon(FeatherIcons.globe),
+          onPressed: () {
+            context.locale = LanguageManager.instance.changeLocale();
+          },
+        )
+      ]);
 
   List<Widget> get _buildLatestRecipeSection => [
         BodyTitleText(text: "latestRecipes", haveIcon: true, onPressed: () {}),

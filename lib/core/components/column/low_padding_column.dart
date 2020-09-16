@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../extensions/context_extension.dart';
+import '../../extensions/double_extension.dart';
 
 class LowPaddingColumn extends StatelessWidget {
   final List<Widget> children;
@@ -12,7 +13,7 @@ class LowPaddingColumn extends StatelessWidget {
       padding: context.paddingNormal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
+        children: <Widget>[context.lowValue.toHeightSizedBox, ...children],
       ),
     );
   }

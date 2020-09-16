@@ -125,7 +125,6 @@ class _ProfileViewState extends BaseState<ProfileView>
 
   Widget get _buildRecipeGridTab => LowPaddingColumn(
         children: [
-          context.lowValue.toHeightSizedBox,
           _buildRecipeTitleRow(
               title: "My cookbooks",
               icon: FeatherIcons.plusCircle,

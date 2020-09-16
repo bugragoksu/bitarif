@@ -1,3 +1,5 @@
+import 'package:bitarif/screen/_widgets/card/categorie_card.dart';
+import 'package:bitarif/screen/_widgets/rows/search_bar_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -70,32 +72,18 @@ class _SearchViewState extends BaseState<SearchView> {
       ));
 
   List<Widget> get _buildHeadLineSection => [
-        context.lowValue.toHeightSizedBox,
         LocaleText(
             value: "search",
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: context.mediumValue)),
         context.lowValue.toHeightSizedBox,
-        _buildSearchBarSection,
+        SearchBarRow(
+          searchFieldController: _searchFieldController,
+        ),
         context.lowValue.toHeightSizedBox,
         ColoredGradientDivider()
       ];
 
-  Widget get _buildSearchBarSection => Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: SearchField(
-              controller: _searchFieldController,
-            ),
-          ),
-          context.lowValue.toWidthSizedBox,
-          Expanded(
-            flex: 1,
-            child: FilterButton(),
-          ),
-        ],
-      );
   Widget get _buildCategories => Container(
         child: GridView.count(
           childAspectRatio: (context.width / 3) / (context.height / 4.5),
@@ -110,16 +98,8 @@ class _SearchViewState extends BaseState<SearchView> {
 
   List<Widget> get _buildItems => List.generate(
       9,
-      (index) => Container(
-            decoration: BoxDecoration(
-                color: context.theme.colorScheme.primary.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(10.0)),
-            alignment: Alignment.center,
-            child: Padding(
-              padding: context.paddingNormal,
-              child: Image.network(
-                  "https://img.icons8.com/ios/100/000000/sunny-side-up-eggs.png"),
-            ),
+      (index) => CategorieCard(
+            url: "https://img.icons8.com/ios/100/000000/sunny-side-up-eggs.png",
           ));
 
   List<Widget> get _buildAllTextsSection => [

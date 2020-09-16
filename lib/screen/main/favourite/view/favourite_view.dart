@@ -78,7 +78,6 @@ class _FavouriteViewState extends BaseState<FavouriteView> {
         ),
       );
   List<Widget> get _buildFavTitle => [
-        context.lowValue.toHeightSizedBox,
         LocaleText(
             value: "favList",
             style: TextStyle(

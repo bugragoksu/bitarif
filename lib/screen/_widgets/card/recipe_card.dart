@@ -8,7 +8,7 @@ class RecipeCard extends StatelessWidget {
   final String path;
   final VoidCallback onPressed;
 
-  const RecipeCard({Key key, this.path, @required this.onPressed})
+  const RecipeCard({Key key, @required this.path, @required this.onPressed})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   Text("45 Min",
                       style: TextStyle(
+                          fontWeight: FontWeight.w600,
                           color: context.theme.colorScheme.background))
                 ],
               ),
