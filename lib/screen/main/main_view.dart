@@ -1,12 +1,12 @@
-import 'package:bitarif/screen/main/favourite/view/favourite_view.dart';
-
-import 'profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../core/base/state/base_state.dart';
 import '../_widgets/bottom_bar/bottom_bar.dart';
+import 'favourite/view/favourite_view.dart';
 import 'home/view/home_view.dart';
+import 'profile/view/profile_view.dart';
+import 'search/view/search_view.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -28,8 +28,7 @@ class _MainViewState extends BaseState<MainView> {
   void initState() {
     pages = [
       HomeView(key: _homeKey),
-      Container(
-        color: Colors.green,
+      SearchView(
         key: _searchKey,
       ),
       FavouriteView(

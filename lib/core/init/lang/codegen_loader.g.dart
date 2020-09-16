@@ -32,7 +32,12 @@ class CodegenLoader extends AssetLoader{
   "privacy": "privacy policy.",
   "and": "and ",
   "welcome": "Welcome",
-  "favList": "Favourites"
+  "favList": "Favourites",
+  "search": "Search",
+  "hungry": "hungry",
+  "allRecipes": "All Recipes",
+  "allInspirations": "All Inspiration",
+  "getInspired": "Get Inspired"
 };
 static const Map<String,dynamic> tr = {
   "signIn": "Giriş Yap",
@@ -52,7 +57,12 @@ static const Map<String,dynamic> tr = {
   "privacy": "Gizlilik Sözleşmesi.",
   "and": "ve ",
   "welcome": "Hoşgeldin",
-  "favList": "Favoriler"
+  "favList": "Favoriler",
+  "search": "Ara",
+  "hungry": "Aç mısın",
+  "allRecipes": "Tüm Tarifler",
+  "allInspirations": "Tüm İlhamlar",
+  "getInspired": "İlham Alın"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "tr": tr};
 }
