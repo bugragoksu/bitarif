@@ -5,4 +5,5 @@ class NavigationConstants {
   static const RECIPE_LIST_VIEW = "/recipeList";
   static const NEW_RECIPE = "/newRecipe";
   static const CATEGORIES = "/categories";
+  static const INSPIRATIONS = "/inspirations";
 }

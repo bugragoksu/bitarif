@@ -115,7 +115,10 @@ class _SearchViewState extends BaseState<SearchView> {
         context.lowValue.toHeightSizedBox,
         ClickableIconText(
           icon: FeatherIcons.chevronRight,
-          onPressed: () {},
+          onPressed: () {
+            NavigationManager.instance
+                .navigateToPage(path: NavigationConstants.INSPIRATIONS);
+          },
           text: "allInspirations",
         )
       ];

@@ -56,7 +56,8 @@ class CodegenLoader extends AssetLoader{
   "prepationOfTheRecipe": "Prepation of the recipe",
   "ingredients": "Ingredients",
   "ingredientsOfTheRecipe": "Ingredients of the recipe",
-  "send": "Send"
+  "send": "Send",
+  "inspirations": "Inspirations"
 };
 static const Map<String,dynamic> tr = {
   "signIn": "Giriş Yap",
@@ -100,7 +101,8 @@ static const Map<String,dynamic> tr = {
   "prepationOfTheRecipe": "Tarifin hazırlanışı",
   "ingredients": "Malzemeler",
   "ingredientsOfTheRecipe": "Tarifin malzemeleri",
-  "send": "Gönder"
+  "send": "Gönder",
+  "inspirations": "İlhamlar"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "tr": tr};
 }

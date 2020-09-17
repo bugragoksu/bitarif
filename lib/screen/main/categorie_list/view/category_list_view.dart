@@ -1,13 +1,12 @@
-import 'package:bitarif/core/base/widget/base_widget.dart';
-import 'package:bitarif/core/components/text/locale_text.dart';
-import 'package:bitarif/core/extensions/context_extension.dart';
-import 'package:bitarif/core/extensions/double_extension.dart';
-import 'package:bitarif/screen/_widgets/card/categorie_card.dart';
-import 'package:bitarif/screen/_widgets/colored_gradient_divider.dart';
-import 'package:bitarif/screen/_widgets/columns/three_widget_title.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
+import '../../../../core/base/widget/base_widget.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/double_extension.dart';
+import '../../../_widgets/card/categorie_card.dart';
+import '../../../_widgets/columns/three_widget_title.dart';
 import '../viewmodel/category_list_view_model.dart';
 
 class CategoryListView extends StatefulWidget {
@@ -15,7 +14,7 @@ class CategoryListView extends StatefulWidget {
   _CategoryListViewState createState() => _CategoryListViewState();
 }
 
-class _CategoryListViewState extends State<CategoryListView> {
+class _CategoryListViewState extends BaseState<CategoryListView> {
   @override
   Widget build(BuildContext context) {
     CategoryListViewModel viewModel;
