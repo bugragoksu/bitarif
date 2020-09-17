@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/low_padding_column.dart';
-import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../_widgets/card/recipe_card.dart';
-import '../../../_widgets/colored_gradient_divider.dart';
+import '../../../_widgets/columns/three_widget_title.dart';
 import '../../../_widgets/rows/search_bar_row.dart';
 import '../viewmodel/recipe_list_view_model.dart';
 
@@ -55,10 +54,9 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
       child: SingleChildScrollView(
         child: LowPaddingColumn(
           children: [
-            _buildHeadLineSection,
-            context.lowValue.toHeightSizedBox,
-            ColoredGradientDivider(),
-            context.normalValue.toHeightSizedBox,
+            ThreeWidgetTitle(
+              title: "Breakfast",
+            ),
             SearchBarRow(
               searchFieldController: _searchFieldController,
             ),
@@ -67,31 +65,6 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
           ],
         ),
       ));
-
-  Widget get _buildHeadLineSection =>
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: LocaleText(
-              value: "back",
-              style: TextStyle(
-                  fontSize: context.normalValue * 1.25,
-                  color: context.theme.colorScheme.secondary)),
-        ),
-        LocaleText(
-            value: "Breakfast",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: context.normalValue * 1.5,
-                color: context.theme.colorScheme.primary)),
-        LocaleText(
-            value: "done",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: context.theme.colorScheme.background)),
-      ]);
 
   Widget get _buildRecipes => GridView.count(
         childAspectRatio: (context.width / 3) / (context.height / 4),

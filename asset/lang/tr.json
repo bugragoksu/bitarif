@@ -23,5 +23,20 @@
     "allInspirations": "Tüm İlhamlar",
     "getInspired": "İlham Alın",
     "latestRecipes": "Son Tarifler",
-    "back": "Geri"
+    "back": "Geri",
+    "myRecipes": "Tariflerim",
+    "follows": "Takip Ettiklerim",
+    "followers": "Takipçilerim",
+    "newRecipe": "Yeni Tarif",
+    "title": "Başlık",
+    "titleOfTheRecipe": "Tarifin başlığı",
+    "categorie": "Kategori",
+    "time": "Süre",
+    "serving": "Kaç kişilik",
+    "difficulty": "Zorluk",
+    "prepation": "Hazırlanış",
+    "prepationOfTheRecipe": "Tarifin hazırlanışı",
+    "ingredients": "Malzemeler",
+    "ingredientsOfTheRecipe": "Tarifin malzemeleri",
+    "send": "Gönder"
 }

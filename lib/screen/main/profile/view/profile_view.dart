@@ -1,3 +1,5 @@
+import 'package:bitarif/core/constants/navigation/navigation_constants.dart';
+import 'package:bitarif/core/init/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -126,9 +128,12 @@ class _ProfileViewState extends BaseState<ProfileView>
   Widget get _buildRecipeGridTab => LowPaddingColumn(
         children: [
           _buildRecipeTitleRow(
-              title: "My cookbooks",
+              title: "myRecipes",
               icon: FeatherIcons.plusCircle,
-              onPressed: () {}),
+              onPressed: () {
+                NavigationManager.instance
+                    .navigateToPage(path: NavigationConstants.NEW_RECIPE);
+              }),
           context.lowValue.toHeightSizedBox,
           _buildRecipeGridView,
         ],
@@ -169,7 +174,7 @@ class _ProfileViewState extends BaseState<ProfileView>
             children: [
               context.lowValue.toHeightSizedBox,
               _buildRecipeTitleRow(
-                  title: "Follows",
+                  title: "follows",
                   icon: FeatherIcons.arrowRightCircle,
                   onPressed: () {}),
               context.lowValue.toHeightSizedBox,
@@ -182,7 +187,7 @@ class _ProfileViewState extends BaseState<ProfileView>
             children: [
               context.lowValue.toHeightSizedBox,
               _buildRecipeTitleRow(
-                  title: "Followers",
+                  title: "followers",
                   icon: FeatherIcons.arrowRightCircle,
                   onPressed: () {}),
               context.lowValue.toHeightSizedBox,

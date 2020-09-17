@@ -1,5 +1,3 @@
-import 'package:bitarif/screen/_widgets/card/categorie_card.dart';
-import 'package:bitarif/screen/_widgets/rows/search_bar_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -9,9 +7,9 @@ import '../../../../core/components/column/low_padding_column.dart';
 import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
-import '../../../_widgets/buttons/filter_button.dart';
+import '../../../_widgets/card/categorie_card.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
-import '../../../_widgets/fields/search_field.dart';
+import '../../../_widgets/rows/search_bar_row.dart';
 import '../../../_widgets/texts/clickable_icon_text.dart';
 import '../viewmodel/search_view_model.dart';
 

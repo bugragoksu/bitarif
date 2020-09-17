@@ -39,7 +39,22 @@ class CodegenLoader extends AssetLoader{
   "allInspirations": "All Inspiration",
   "getInspired": "Get Inspired",
   "latestRecipes": "Latest Recipes",
-  "back": "Back"
+  "back": "Back",
+  "myRecipes": "My Recipes",
+  "follows": "Follows",
+  "followers": "Followers",
+  "newRecipe": "New Recipe",
+  "title": "Title",
+  "titleOfTheRecipe": "Title of the recipe",
+  "categorie": "Categorie",
+  "time": "Time",
+  "serving": "Serving",
+  "difficulty": "Difficulty",
+  "prepation": "Prepation",
+  "prepationOfTheRecipe": "Prepation of the recipe",
+  "ingredients": "Ingredients",
+  "ingredientsOfTheRecipe": "Ingredients of the recipe",
+  "send": "Send"
 };
 static const Map<String,dynamic> tr = {
   "signIn": "Giriş Yap",
@@ -66,7 +81,22 @@ static const Map<String,dynamic> tr = {
   "allInspirations": "Tüm İlhamlar",
   "getInspired": "İlham Alın",
   "latestRecipes": "Son Tarifler",
-  "back": "Geri"
+  "back": "Geri",
+  "myRecipes": "Tariflerim",
+  "follows": "Takip Ettiklerim",
+  "followers": "Takipçilerim",
+  "newRecipe": "Yeni Tarif",
+  "title": "Başlık",
+  "titleOfTheRecipe": "Tarifin başlığı",
+  "categorie": "Kategori",
+  "time": "Süre",
+  "serving": "Kaç kişilik",
+  "difficulty": "Zorluk",
+  "prepation": "Hazırlanış",
+  "prepationOfTheRecipe": "Tarifin hazırlanışı",
+  "ingredients": "Malzemeler",
+  "ingredientsOfTheRecipe": "Tarifin malzemeleri",
+  "send": "Gönder"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "tr": tr};
 }

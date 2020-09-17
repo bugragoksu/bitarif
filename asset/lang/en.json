@@ -23,5 +23,20 @@
     "allInspirations": "All Inspiration",
     "getInspired": "Get Inspired",
     "latestRecipes": "Latest Recipes",
-    "back": "Back"
+    "back": "Back",
+    "myRecipes": "My Recipes",
+    "follows": "Follows",
+    "followers": "Followers",
+    "newRecipe": "New Recipe",
+    "title": "Title",
+    "titleOfTheRecipe": "Title of the recipe",
+    "categorie": "Categorie",
+    "time": "Time",
+    "serving": "Serving",
+    "difficulty": "Difficulty",
+    "prepation": "Prepation",
+    "prepationOfTheRecipe": "Prepation of the recipe",
+    "ingredients": "Ingredients",
+    "ingredientsOfTheRecipe": "Ingredients of the recipe",
+    "send": "Send"
 }

@@ -1,3 +1,4 @@
+import 'package:bitarif/screen/main/new_recipe/view/new_recipe_view.dart';
 import 'package:bitarif/screen/main/recipe_list/view/recipe_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,9 @@ class NavigationRoute {
         break;
       case NavigationConstants.RECIPE_LIST_VIEW:
         return normalNavigate(RecipeListView());
+        break;
+      case NavigationConstants.NEW_RECIPE:
+        return normalNavigate(NewRecipeView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());
