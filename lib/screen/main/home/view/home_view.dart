@@ -1,3 +1,4 @@
+import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -37,37 +38,26 @@ class _HomeViewState extends BaseState<HomeView> {
     );
   }
 
-  Widget get _buildScaffold => SafeArea(
-        child: Scaffold(
-          body: _buildBody,
-        ),
-      );
-
-  Widget get _buildBody => Container(
-        height: double.infinity,
-        child: SingleChildScrollView(
-          child: LowPaddingColumn(
-            children: [
-              _buildTitle,
-              context.lowValue.toHeightSizedBox,
-              ColoredGradientDivider(),
-              context.normalValue.toHeightSizedBox,
-              BodyTitleText(
-                text: "getInspired",
-                haveIcon: false,
-              ),
-              context.lowValue.toHeightSizedBox,
-              BlogCard(
-                path:
-                    "https://www.abouttimemagazine.co.uk/wp-content/uploads/2016/01/10559937_941361799269538_2577068189735280194_n.jpg",
-                title: "Manger",
-                desc: "Confessions of a bad blogger",
-              ),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildLatestRecipeSection
-            ],
+  Widget get _buildScaffold => BaseWidget(
+        children: [
+          _buildTitle,
+          context.lowValue.toHeightSizedBox,
+          ColoredGradientDivider(),
+          context.normalValue.toHeightSizedBox,
+          BodyTitleText(
+            text: "getInspired",
+            haveIcon: false,
           ),
-        ),
+          context.lowValue.toHeightSizedBox,
+          BlogCard(
+            path:
+                "https://www.abouttimemagazine.co.uk/wp-content/uploads/2016/01/10559937_941361799269538_2577068189735280194_n.jpg",
+            title: "Manger",
+            desc: "Confessions of a bad blogger",
+          ),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildLatestRecipeSection
+        ],
       );
 
   Widget get _buildTitle => Row(children: [

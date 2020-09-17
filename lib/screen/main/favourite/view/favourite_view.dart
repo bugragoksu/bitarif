@@ -1,3 +1,4 @@
+import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -31,19 +32,11 @@ class _FavouriteViewState extends BaseState<FavouriteView> {
     );
   }
 
-  Widget get _buildScaffold => SafeArea(
-          child: Scaffold(
-        body: _buildBody,
-      ));
-
-  Widget get _buildBody => Container(
-      height: double.infinity,
-      child: LowPaddingColumn(
+  Widget get _buildScaffold => BaseWidget(
         children: [
           ..._buildFavTitle,
           context.normalValue.toHeightSizedBox,
-          Expanded(
-              child: ListView.builder(
+          ListView.builder(
             shrinkWrap: true,
             itemExtent: context.height / 10,
             itemCount: 6,
@@ -57,9 +50,9 @@ class _FavouriteViewState extends BaseState<FavouriteView> {
                 Divider()
               ],
             ),
-          )),
+          ),
         ],
-      ));
+      );
 
   Widget _buildRecipeTile({String title, String url, VoidCallback onTap}) =>
       ListTile(

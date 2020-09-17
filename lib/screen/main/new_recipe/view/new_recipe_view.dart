@@ -1,3 +1,4 @@
+import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:bitarif/screen/_widgets/buttons/new_recipe_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -35,43 +36,36 @@ class _NewRecipeViewState extends BaseState<NewRecipeView> {
     );
   }
 
-  Widget get _buildScaffold => SafeArea(child: Scaffold(body: _buildBody));
-
-  Widget get _buildBody => Container(
-        height: double.infinity,
-        child: SingleChildScrollView(
-          child: LowPaddingColumn(
-            children: [
-              ThreeWidgetTitle(
-                title: "newRecipe",
-              ),
-              _buildImageContainer,
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection(
-                  "title", _buildTitleField(1, "titleOfTheRecipe", 1)),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection(
-                  "categorie", _buildDropdown(['A', 'b'], (value) {})),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection(
-                  "time", _buildDropdown(['30m', '1h', '1.5h'], (value) {})),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection(
-                  "serving", _buildDropdown(['2-4', '4-6', '6+'], (value) {})),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection("difficulty",
-                  _buildDropdown(['Kolay', 'Orta', 'Zor'], (value) {})),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection("prepation",
-                  _buildTitleField(null, "prepationOfTheRecipe", 5)),
-              context.mediumValue.toHeightSizedBox,
-              ..._buildItemSection("ingredients",
-                  _buildTitleField(null, "ingredientsOfTheRecipe", 5)),
-              context.mediumValue.toHeightSizedBox,
-              Center(child: NewRecipeButton())
-            ],
+  Widget get _buildScaffold => BaseWidget(
+        children: [
+          ThreeWidgetTitle(
+            title: "newRecipe",
           ),
-        ),
+          _buildImageContainer,
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection(
+              "title", _buildTitleField(1, "titleOfTheRecipe", 1)),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection(
+              "categorie", _buildDropdown(['A', 'b'], (value) {})),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection(
+              "time", _buildDropdown(['30m', '1h', '1.5h'], (value) {})),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection(
+              "serving", _buildDropdown(['2-4', '4-6', '6+'], (value) {})),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection("difficulty",
+              _buildDropdown(['Kolay', 'Orta', 'Zor'], (value) {})),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection(
+              "prepation", _buildTitleField(null, "prepationOfTheRecipe", 5)),
+          context.mediumValue.toHeightSizedBox,
+          ..._buildItemSection("ingredients",
+              _buildTitleField(null, "ingredientsOfTheRecipe", 5)),
+          context.mediumValue.toHeightSizedBox,
+          Center(child: NewRecipeButton())
+        ],
       );
 
   Widget get _buildImageContainer => Center(

@@ -1,3 +1,4 @@
+import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -49,25 +50,15 @@ class _SearchViewState extends BaseState<SearchView> {
     );
   }
 
-  Widget get _buildScaffold => SafeArea(
-        child: Scaffold(
-          body: _buildBody,
-        ),
+  Widget get _buildScaffold => BaseWidget(
+        children: [
+          ..._buildHeadLineSection,
+          context.mediumValue.toHeightSizedBox,
+          _buildCategories,
+          context.mediumValue.toHeightSizedBox,
+          ..._buildAllTextsSection,
+        ],
       );
-
-  Widget get _buildBody => Container(
-      height: double.infinity,
-      child: SingleChildScrollView(
-        child: LowPaddingColumn(
-          children: [
-            ..._buildHeadLineSection,
-            context.mediumValue.toHeightSizedBox,
-            _buildCategories,
-            context.mediumValue.toHeightSizedBox,
-            ..._buildAllTextsSection,
-          ],
-        ),
-      ));
 
   List<Widget> get _buildHeadLineSection => [
         LocaleText(

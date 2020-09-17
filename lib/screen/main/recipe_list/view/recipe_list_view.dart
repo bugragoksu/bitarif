@@ -1,3 +1,4 @@
+import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
@@ -44,27 +45,18 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
             _buildScaffold);
   }
 
-  Widget get _buildScaffold => SafeArea(
-          child: Scaffold(
-        body: _buildBody,
-      ));
-
-  Widget get _buildBody => Container(
-      height: double.infinity,
-      child: SingleChildScrollView(
-        child: LowPaddingColumn(
-          children: [
-            ThreeWidgetTitle(
-              title: "Breakfast",
-            ),
-            SearchBarRow(
-              searchFieldController: _searchFieldController,
-            ),
-            context.normalValue.toHeightSizedBox,
-            _buildRecipes
-          ],
-        ),
-      ));
+  Widget get _buildScaffold => BaseWidget(
+        children: [
+          ThreeWidgetTitle(
+            title: "Breakfast",
+          ),
+          SearchBarRow(
+            searchFieldController: _searchFieldController,
+          ),
+          context.normalValue.toHeightSizedBox,
+          _buildRecipes
+        ],
+      );
 
   Widget get _buildRecipes => GridView.count(
         childAspectRatio: (context.width / 3) / (context.height / 4),
