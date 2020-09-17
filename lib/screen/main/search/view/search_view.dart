@@ -1,13 +1,14 @@
-import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/components/column/low_padding_column.dart';
+import '../../../../core/base/widget/base_widget.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/card/categorie_card.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
 import '../../../_widgets/rows/search_bar_row.dart';
@@ -75,6 +76,7 @@ class _SearchViewState extends BaseState<SearchView> {
 
   Widget get _buildCategories => Container(
         child: GridView.count(
+          controller: ScrollController(),
           childAspectRatio: (context.width / 3) / (context.height / 4.5),
           crossAxisCount: 3,
           shrinkWrap: true,
@@ -88,13 +90,26 @@ class _SearchViewState extends BaseState<SearchView> {
   List<Widget> get _buildItems => List.generate(
       9,
       (index) => CategorieCard(
+            title: "Breakfast",
             url: "https://img.icons8.com/ios/100/000000/sunny-side-up-eggs.png",
           ));
 
   List<Widget> get _buildAllTextsSection => [
         ClickableIconText(
           icon: FeatherIcons.chevronRight,
-          onPressed: () {},
+          onPressed: () {
+            NavigationManager.instance
+                .navigateToPage(path: NavigationConstants.CATEGORIES);
+          },
+          text: "allCategories",
+        ),
+        context.lowValue.toHeightSizedBox,
+        ClickableIconText(
+          icon: FeatherIcons.chevronRight,
+          onPressed: () {
+            NavigationManager.instance
+                .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+          },
           text: "allRecipes",
         ),
         context.lowValue.toHeightSizedBox,

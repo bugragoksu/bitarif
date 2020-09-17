@@ -1,10 +1,11 @@
-import 'package:bitarif/screen/main/new_recipe/view/new_recipe_view.dart';
-import 'package:bitarif/screen/main/recipe_list/view/recipe_list_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
 import '../../../screen/authenticate/splash/view/splash_view.dart';
+import '../../../screen/main/categorie_list/view/category_list_view.dart';
 import '../../../screen/main/main_view.dart';
+import '../../../screen/main/new_recipe/view/new_recipe_view.dart';
+import '../../../screen/main/recipe_list/view/recipe_list_view.dart';
 import '../../constants/navigation/navigation_constants.dart';
 
 class NavigationRoute {
@@ -29,6 +30,9 @@ class NavigationRoute {
         break;
       case NavigationConstants.NEW_RECIPE:
         return normalNavigate(NewRecipeView());
+        break;
+      case NavigationConstants.CATEGORIES:
+        return normalNavigate(CategoryListView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());

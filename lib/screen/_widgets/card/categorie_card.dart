@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 class CategorieCard extends StatelessWidget {
   final String url;
+  final String title;
 
-  const CategorieCard({Key key, @required this.url}) : super(key: key);
+  const CategorieCard({Key key, @required this.url, @required this.title})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,9 +21,14 @@ class CategorieCard extends StatelessWidget {
             color: context.theme.colorScheme.primary.withOpacity(0.1),
             borderRadius: BorderRadius.circular(10.0)),
         alignment: Alignment.center,
-        child: Padding(
-          padding: context.paddingNormal,
-          child: Image.network(url),
+        child: Column(
+          children: [
+            Padding(
+              padding: context.paddingNormal,
+              child: Image.network(url),
+            ),
+            Text(title)
+          ],
         ),
       ),
     );

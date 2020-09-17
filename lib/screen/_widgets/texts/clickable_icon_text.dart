@@ -19,19 +19,23 @@ class ClickableIconText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Row(
-        children: [
-          LocaleText(
-              value: text,
-              style: TextStyle(
-                  color: context.theme.colorScheme.secondary,
-                  fontWeight: FontWeight.bold)),
-          context.lowValue.toWidthSizedBox,
-          Icon(
-            icon,
-            color: context.theme.colorScheme.secondary,
-          )
-        ],
+      child: Container(
+        width: context.width / 2.5,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            LocaleText(
+                value: text,
+                style: TextStyle(
+                    color: context.theme.colorScheme.secondary,
+                    fontWeight: FontWeight.bold)),
+            context.lowValue.toWidthSizedBox,
+            Icon(
+              icon,
+              color: context.theme.colorScheme.secondary,
+            )
+          ],
+        ),
       ),
     );
   }
