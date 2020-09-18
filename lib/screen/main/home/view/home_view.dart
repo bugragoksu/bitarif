@@ -6,12 +6,14 @@ import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/base/widget/base_widget.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../../core/init/lang/language_manager.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/card/blog_card.dart';
-import '../../../_widgets/card/recipe_card.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
+import '../../../_widgets/container/animated_recipe_card.dart';
 import '../../../_widgets/texts/body_title_text.dart';
 import '../viewmodel/home_view_model.dart';
 
@@ -87,7 +89,13 @@ class _HomeViewState extends BaseState<HomeView> {
       ]);
 
   List<Widget> get _buildLatestRecipeSection => [
-        BodyTitleText(text: "latestRecipes", haveIcon: true, onPressed: () {}),
+        BodyTitleText(
+            text: "latestRecipes",
+            haveIcon: true,
+            onPressed: () {
+              NavigationManager.instance
+                  .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+            }),
         Container(
           height: context.height / 3,
           width: context.width,
@@ -95,10 +103,7 @@ class _HomeViewState extends BaseState<HomeView> {
             itemCount: 4,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) => RecipeCard(
-              path: urlList[index],
-              onPressed: () {},
-            ),
+            itemBuilder: (_, index) => AnimatedRecipeCard(),
           ),
         ),
       ];

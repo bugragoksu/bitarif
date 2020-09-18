@@ -5,8 +5,8 @@ import '../../../../core/base/view/base_view.dart';
 import '../../../../core/base/widget/base_widget.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
-import '../../../_widgets/card/recipe_card.dart';
 import '../../../_widgets/columns/three_widget_title.dart';
+import '../../../_widgets/container/animated_recipe_card.dart';
 import '../../../_widgets/rows/search_bar_row.dart';
 import '../viewmodel/recipe_list_view_model.dart';
 
@@ -69,11 +69,6 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
         children: [..._buildItems],
       );
 
-  List<Widget> get _buildItems => List.generate(
-      9,
-      (index) => RecipeCard(
-            onPressed: () {},
-            path:
-                "https://static01.nyt.com/images/2020/02/10/dining/onepot-cheesypasta/onepot-cheesypasta-articleLarge.jpg",
-          ));
+  List<Widget> get _buildItems =>
+      List.generate(9, (index) => AnimatedRecipeCard());
 }

@@ -1,12 +1,13 @@
-import 'package:bitarif/screen/main/blog_list/view/blog_list_view.dart';
-import 'package:bitarif/screen/main/filter/view/filter_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
 import '../../../screen/authenticate/splash/view/splash_view.dart';
+import '../../../screen/main/blog_list/view/blog_list_view.dart';
 import '../../../screen/main/categorie_list/view/category_list_view.dart';
+import '../../../screen/main/filter/view/filter_view.dart';
 import '../../../screen/main/main_view.dart';
 import '../../../screen/main/new_recipe/view/new_recipe_view.dart';
+import '../../../screen/main/recipe_detail.dart/view/recipe_detail_view.dart';
 import '../../../screen/main/recipe_list/view/recipe_list_view.dart';
 import '../../constants/navigation/navigation_constants.dart';
 
@@ -41,6 +42,9 @@ class NavigationRoute {
         break;
       case NavigationConstants.FILTER:
         return normalNavigate(FilterView());
+        break;
+      case NavigationConstants.RECIPE_DETAIL:
+        return normalNavigate(RecipeDetailView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());

@@ -16,7 +16,7 @@ class FilterButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0)),
         child: IconButton(
             color: context.theme.colorScheme.primary,
-            icon: Icon(FeatherIcons.filter),
+            icon: Icon(FeatherIcons.sliders),
             onPressed: () {
               NavigationManager.instance
                   .navigateToPage(path: NavigationConstants.FILTER);

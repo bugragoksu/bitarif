@@ -7,4 +7,5 @@ class NavigationConstants {
   static const CATEGORIES = "/categories";
   static const INSPIRATIONS = "/inspirations";
   static const FILTER = "/filter";
+  static const RECIPE_DETAIL = "/recipeDetail";
 }
