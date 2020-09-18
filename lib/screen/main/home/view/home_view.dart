@@ -1,11 +1,10 @@
-import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/components/column/low_padding_column.dart';
+import '../../../../core/base/widget/base_widget.dart';
 import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';

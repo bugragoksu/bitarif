@@ -1,4 +1,5 @@
 import 'package:bitarif/screen/main/blog_list/view/blog_list_view.dart';
+import 'package:bitarif/screen/main/filter/view/filter_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
@@ -37,6 +38,9 @@ class NavigationRoute {
         break;
       case NavigationConstants.INSPIRATIONS:
         return normalNavigate(BlogListView());
+        break;
+      case NavigationConstants.FILTER:
+        return normalNavigate(FilterView());
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());

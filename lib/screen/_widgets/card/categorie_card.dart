@@ -1,33 +1,47 @@
-import 'package:bitarif/core/constants/navigation/navigation_constants.dart';
-import 'package:bitarif/core/extensions/context_extension.dart';
-import 'package:bitarif/core/init/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 
-class CategorieCard extends StatelessWidget {
+import '../../../core/components/card/colored_background_card.dart';
+import '../../../core/extensions/context_extension.dart';
+
+class CategorieCard extends StatefulWidget {
   final String url;
   final String title;
+  final VoidCallback onPressed;
+  final bool isSelected;
 
-  const CategorieCard({Key key, @required this.url, @required this.title})
+  const CategorieCard(
+      {Key key,
+      @required this.url,
+      @required this.title,
+      @required this.onPressed,
+      this.isSelected})
       : super(key: key);
+
+  @override
+  _CategorieCardState createState() => _CategorieCardState();
+}
+
+class _CategorieCardState extends State<CategorieCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        NavigationManager.instance
-            .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: context.theme.colorScheme.primary.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(10.0)),
-        alignment: Alignment.center,
+      onTap: widget.onPressed,
+      child: ColoredBackGroundCard(
+        bgColor: context.theme.colorScheme.primary.withOpacity(0.1),
         child: Column(
           children: [
             Padding(
               padding: context.paddingNormal,
-              child: Image.network(url),
+              child: Image.network(
+                widget.url,
+                color: widget.isSelected != null
+                    ? widget.isSelected
+                        ? context.theme.colorScheme.secondary
+                        : context.theme.colorScheme.primary
+                    : context.theme.colorScheme.primary,
+              ),
             ),
-            Text(title)
+            Text(widget.title)
           ],
         ),
       ),

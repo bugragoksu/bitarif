@@ -29,6 +29,7 @@ class _BlogListViewState extends BaseState<BlogListView> {
           BaseWidget(
         children: [
           ThreeWidgetTitle(
+            isVisibleDoneText: false,
             title: "inspirations",
           ),
           context.lowValue.toHeightSizedBox,

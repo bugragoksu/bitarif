@@ -90,6 +90,10 @@ class _SearchViewState extends BaseState<SearchView> {
   List<Widget> get _buildItems => List.generate(
       9,
       (index) => CategorieCard(
+            onPressed: () {
+              NavigationManager.instance
+                  .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+            },
             title: "Breakfast",
             url: "https://img.icons8.com/ios/100/000000/sunny-side-up-eggs.png",
           ));

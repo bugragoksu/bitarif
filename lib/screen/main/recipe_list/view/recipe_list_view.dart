@@ -1,9 +1,8 @@
-import 'package:bitarif/core/base/widget/base_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/components/column/low_padding_column.dart';
+import '../../../../core/base/widget/base_widget.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../_widgets/card/recipe_card.dart';
@@ -48,6 +47,7 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
   Widget get _buildScaffold => BaseWidget(
         children: [
           ThreeWidgetTitle(
+            isVisibleDoneText: false,
             title: "Breakfast",
           ),
           SearchBarRow(

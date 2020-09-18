@@ -7,8 +7,10 @@ import '../colored_gradient_divider.dart';
 
 class ThreeWidgetTitle extends StatelessWidget {
   final String title;
-
-  const ThreeWidgetTitle({Key key, @required this.title}) : super(key: key);
+  final bool isVisibleDoneText;
+  const ThreeWidgetTitle(
+      {Key key, @required this.title, @required this.isVisibleDoneText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,10 @@ class ThreeWidgetTitle extends StatelessWidget {
             LocaleText(
                 value: "done",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: context.theme.colorScheme.background))
+                    fontSize: context.normalValue * 1.25,
+                    color: isVisibleDoneText
+                        ? context.theme.colorScheme.secondary
+                        : context.theme.colorScheme.background))
           ],
         ),
         context.lowValue.toHeightSizedBox,

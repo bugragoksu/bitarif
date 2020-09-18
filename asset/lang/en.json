@@ -41,5 +41,7 @@
     "ingredients": "Ingredients",
     "ingredientsOfTheRecipe": "Ingredients of the recipe",
     "send": "Send",
-    "inspirations": "Inspirations"
+    "inspirations": "Inspirations",
+    "done": "Done",
+    "filter": "Filter"
 }
