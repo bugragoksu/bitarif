@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/components/container/animated_open_container.dart';
-import '../../main/blog_detail/view/blog_view.dart';
+import '../../main/blog/blog_detail/view/blog_view.dart';
 import '../card/blog_card.dart';
 
 class AnimatedBlogCard extends StatelessWidget {

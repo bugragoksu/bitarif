@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/components/container/animated_open_container.dart';
-import '../../main/recipe_detail.dart/view/recipe_detail_view.dart';
+import '../../main/recipe/recipe_detail.dart/view/recipe_detail_view.dart';
 import '../card/recipe_card.dart';
 
 class AnimatedRecipeCard extends StatelessWidget {

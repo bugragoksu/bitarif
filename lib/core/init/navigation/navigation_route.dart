@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
 import '../../../screen/authenticate/splash/view/splash_view.dart';
-import '../../../screen/main/blog_list/view/blog_list_view.dart';
-import '../../../screen/main/categorie_list/view/category_list_view.dart';
-import '../../../screen/main/filter/view/filter_view.dart';
+import '../../../screen/main/blog/blog_list/view/blog_list_view.dart';
+import '../../../screen/main/category/category_list/view/category_list_view.dart';
+import '../../../screen/main/category/filter/view/filter_view.dart';
 import '../../../screen/main/main_view.dart';
-import '../../../screen/main/new_recipe/view/new_recipe_view.dart';
-import '../../../screen/main/recipe_detail.dart/view/recipe_detail_view.dart';
-import '../../../screen/main/recipe_list/view/recipe_list_view.dart';
+import '../../../screen/main/recipe/new_recipe/view/new_recipe_view.dart';
+import '../../../screen/main/recipe/recipe_detail.dart/view/recipe_detail_view.dart';
+import '../../../screen/main/recipe/recipe_list/view/recipe_list_view.dart';
 import '../../constants/navigation/navigation_constants.dart';
 
 class NavigationRoute {

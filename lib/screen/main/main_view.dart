@@ -6,7 +6,7 @@ import '../_widgets/bottom_bar/bottom_bar.dart';
 import 'favourite/view/favourite_view.dart';
 import 'home/view/home_view.dart';
 import 'profile/view/profile_view.dart';
-import 'search/view/search_view.dart';
+import 'category/search/view/search_view.dart';
 
 class MainView extends StatefulWidget {
   @override
