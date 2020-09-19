@@ -43,6 +43,7 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
   }
 
   List<Widget> get _buildChildren => [
+        context.mediumValue.toHeightSizedBox,
         TitleGradientBorderContainer(title: "Breakfast"),
         context.lowValue.toHeightSizedBox,
         _buildRecipeTitle,

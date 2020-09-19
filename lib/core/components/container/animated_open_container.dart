@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:bitarif/core/extensions/int_extension.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedOpenContainer extends StatelessWidget {
@@ -10,6 +11,7 @@ class AnimatedOpenContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
+      transitionDuration: 500.toMillisDuration,
       closedColor: Colors.transparent,
       closedElevation: 0,
       closedShape:

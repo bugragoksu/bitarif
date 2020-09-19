@@ -11,8 +11,8 @@ import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../../core/init/lang/language_manager.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
-import '../../../_widgets/card/blog_card.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
+import '../../../_widgets/container/animated_blog_card.dart';
 import '../../../_widgets/container/animated_recipe_card.dart';
 import '../../../_widgets/texts/body_title_text.dart';
 import '../viewmodel/home_view_model.dart';
@@ -50,12 +50,7 @@ class _HomeViewState extends BaseState<HomeView> {
             haveIcon: false,
           ),
           context.lowValue.toHeightSizedBox,
-          BlogCard(
-            path:
-                "https://www.abouttimemagazine.co.uk/wp-content/uploads/2016/01/10559937_941361799269538_2577068189735280194_n.jpg",
-            title: "Manger",
-            desc: "Confessions of a bad blogger",
-          ),
+          AnimatedBlogCard(),
           context.mediumValue.toHeightSizedBox,
           ..._buildLatestRecipeSection
         ],

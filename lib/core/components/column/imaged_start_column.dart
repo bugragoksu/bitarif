@@ -1,7 +1,7 @@
-import 'package:bitarif/core/extensions/context_extension.dart';
-import 'package:bitarif/core/extensions/double_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+
+import '../../extensions/context_extension.dart';
 
 class ImagedStartColumn extends StatelessWidget {
   final double height, width;
@@ -52,7 +52,6 @@ class ImagedStartColumn extends StatelessWidget {
             ),
           ],
         ),
-        context.mediumValue.toHeightSizedBox,
         ...children ?? []
       ],
     );
