@@ -44,5 +44,8 @@
     "inspirations": "İlhamlar",
     "done": "Uygula",
     "filter": "Filtre",
-    "recipes": "Tarifler"
+    "recipes": "Tarifler",
+    "pleaseEnterEmail": "Lütfen email adresi giriniz",
+    "pleaseEnterPassword": "Lütfen şifre giriniz",
+    "pleaseEnterEmailPassword": "Lütfen email adresi ve şifre giriniz"
 }

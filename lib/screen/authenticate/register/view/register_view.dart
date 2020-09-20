@@ -1,3 +1,4 @@
+import 'package:bitarif/core/init/firebase/model/firebase_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
@@ -19,8 +20,33 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends BaseState<RegisterView> {
   RegisterViewModel registerViewModel;
-  GlobalKey _formKey;
+  GlobalKey<FormState> _formKey;
   TextEditingController nameController, emailController, passwordController;
+  String email, password, name;
+
+  @override
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+    nameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    nameController.addListener(() {
+      setState(() {
+        name = nameController.text;
+      });
+    });
+    emailController.addListener(() {
+      setState(() {
+        email = emailController.text;
+      });
+    });
+    passwordController.addListener(() {
+      setState(() {
+        password = passwordController.text;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +56,6 @@ class _RegisterViewState extends BaseState<RegisterView> {
         model.setContext(context);
         model.init();
         registerViewModel = model;
-        nameController = TextEditingController();
-        emailController = TextEditingController();
-        passwordController = TextEditingController();
       },
       onPageBuilder: (BuildContext context, RegisterViewModel value) =>
           buildScaffold,
@@ -62,7 +85,13 @@ class _RegisterViewState extends BaseState<RegisterView> {
             height: context.mediumValue,
           ),
           RegisterButton(
-            onCompleted: (String errorMessage) {},
+            email: email,
+            password: password,
+            onCompleted: (FirebaseResponse response) {
+              if (response.success) {
+                print("OK");
+              }
+            },
           ),
           SizedBox(
             height: context.mediumValue,

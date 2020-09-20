@@ -44,5 +44,8 @@
     "inspirations": "Inspirations",
     "done": "Done",
     "filter": "Filter",
-    "recipes": "Recipes"
+    "recipes": "Recipes",
+    "pleaseEnterEmail": "Please enter an email",
+    "pleaseEnterPassword": "Please enter a password",
+    "pleaseEnterEmailPassword": "Please enter email & password"
 }

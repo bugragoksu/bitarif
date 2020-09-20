@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 extension ContextExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
+  ScaffoldState get scaffold => Scaffold.of(this);
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+      SnackBar snackBar) {
+    return scaffold.showSnackBar(snackBar);
+  }
 }
 
 extension MediaQueryExtension on BuildContext {

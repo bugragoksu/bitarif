@@ -35,6 +35,8 @@ dependencies:
   dio: ^3.0.10
   flutter_feather_icons: ^1.0.3
   animations: ^1.1.2
+  firebase_auth: ^0.18.0+1
+  firebase_core: ^0.5.0
 
 dev_dependencies:
   build_runner: ^1.10.0
