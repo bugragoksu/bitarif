@@ -1,4 +1,4 @@
-package com.example.bitarif
+package com.bugragoksu.bitarif
 
 import io.flutter.embedding.android.FlutterActivity
 
