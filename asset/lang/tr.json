@@ -47,5 +47,11 @@
     "recipes": "Tarifler",
     "pleaseEnterEmail": "Lütfen email adresi giriniz",
     "pleaseEnterPassword": "Lütfen şifre giriniz",
-    "pleaseEnterEmailPassword": "Lütfen email adresi ve şifre giriniz"
+    "pleaseEnterEmailPassword": "Lütfen email adresi ve şifre giriniz",
+    "emailAlreadyInUse": "Bu email zaten kayıtlı",
+    "invalidEmail": "Lütfen geçerli bir email giriniz",
+    "weakPassword": "Lütfen daha güçlü bir şifre giriniz",
+    "userNotFound": "Bu email adresine kayıtlı bir hesap bulunamadı",
+    "wrongPassword": "Şifrenizi yanlış girdiniz",
+    "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz"
 }

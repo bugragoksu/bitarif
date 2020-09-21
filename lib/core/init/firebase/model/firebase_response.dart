@@ -18,16 +18,22 @@ class FirebaseResponse {
     String message;
     switch (errorCode) {
       case 'email-already-in-use':
-        message = "The account already exists for that email".locale;
+        message = "emailAlreadyInUse".locale;
         break;
       case 'invalid-email':
-        message = "Please supply a valid email".locale;
+        message = "invalidEmail".locale;
         break;
       case 'weak-password':
-        message = "The password provided is too weak".locale;
+        message = "weakPassword".locale;
+        break;
+      case 'user-not-found':
+        message = "userNotFound".locale;
+        break;
+      case 'wrong-password':
+        message = "wrongPassword".locale;
         break;
       default:
-        message = "Something went wrong. Please try again later".locale;
+        message = "somethingWentWrong".locale;
     }
     return message;
   }

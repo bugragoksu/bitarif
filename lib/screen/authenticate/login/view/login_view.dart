@@ -1,3 +1,4 @@
+import 'package:bitarif/core/init/firebase/model/firebase_response.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -30,8 +31,25 @@ class _LoginViewState extends State<LoginView> {
   LoginViewModel loginViewModel;
 
   TextEditingController emailController, passwordController;
-
+  String email, password;
   GlobalKey _formKey;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    emailController.addListener(() {
+      setState(() {
+        email = emailController.text;
+      });
+    });
+    passwordController.addListener(() {
+      setState(() {
+        password = passwordController.text;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +59,7 @@ class _LoginViewState extends State<LoginView> {
           model.setContext(context);
           model.init();
           loginViewModel = model;
-          emailController = TextEditingController();
-          passwordController = TextEditingController();
+
           _formKey = GlobalKey<FormState>();
         },
         onPageBuilder: (BuildContext context, LoginViewModel value) {
@@ -70,9 +87,12 @@ class _LoginViewState extends State<LoginView> {
         buildForm,
         ForgotPasswordButton(),
         LoginButton(
-          onCompleted: (String errorMessage) {
-            NavigationManager.instance
-                .navigateToPageClear(path: NavigationConstants.MAIN_VIEW);
+          email: email,
+          password: password,
+          onCompleted: (FirebaseResponse response) {
+            if (response.success) {
+              print("ok");
+            }
           },
         ),
         _buildSignInWithText,

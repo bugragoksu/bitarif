@@ -47,5 +47,11 @@
     "recipes": "Recipes",
     "pleaseEnterEmail": "Please enter an email",
     "pleaseEnterPassword": "Please enter a password",
-    "pleaseEnterEmailPassword": "Please enter email & password"
+    "pleaseEnterEmailPassword": "Please enter email & password",
+    "emailAlreadyInUse": "The account already exists for that email",
+    "invalidEmail": "Please supply a valid email",
+    "weakPassword": "The password provided is too weak",
+    "userNotFound": "No user found for that email",
+    "wrongPassword": "Wrong password provided for that user",
+    "somethingWentWrong": "Something went wrong. Please try again later"
 }
