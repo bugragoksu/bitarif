@@ -1,1 +1,1 @@
-enum PreferencesKeys { TOKEN }
+enum PreferencesKeys { EMAIL, PASSWORD }

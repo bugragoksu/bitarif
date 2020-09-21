@@ -1,4 +1,3 @@
-import 'package:bitarif/core/init/firebase/model/firebase_response.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -7,10 +6,9 @@ import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/body_column.dart';
 import '../../../../core/components/text/link_text.dart';
 import '../../../../core/components/text/locale_text.dart';
-import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/firebase/model/firebase_response.dart';
 import '../../../../core/init/lang/language_manager.dart';
-import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/buttons/facebook_sign_button.dart';
 import '../../../_widgets/buttons/forgot_password_button.dart';
 import '../../../_widgets/buttons/google_sign_button.dart';

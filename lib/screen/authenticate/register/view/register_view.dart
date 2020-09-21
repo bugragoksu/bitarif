@@ -85,7 +85,9 @@ class _RegisterViewState extends BaseState<RegisterView> {
             height: context.mediumValue,
           ),
           RegisterButton(
+            viewModel: registerViewModel,
             email: email,
+            name: name,
             password: password,
             onCompleted: (FirebaseResponse response) {
               if (response.success) {

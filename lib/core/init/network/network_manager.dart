@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../constants/server/server_constants.dart';
 import 'ICoreDio.dart';
 import 'core_dio.dart';
 
@@ -14,7 +15,7 @@ class NetworkManager {
 
   NetworkManager._init() {
     final baseOptions = BaseOptions(
-      baseUrl: "https://jsonplaceholder.typicode.com/",
+      baseUrl: ServerConstants.API_URL,
     );
     coreDio = CoreDio(baseOptions);
   }
