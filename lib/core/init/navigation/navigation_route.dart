@@ -1,3 +1,4 @@
+import 'package:bitarif/screen/authenticate/auth/model/bitarif_user.dart';
 import 'package:flutter/material.dart';
 
 import '../../../screen/authenticate/auth/view/auth_view.dart';
@@ -26,7 +27,8 @@ class NavigationRoute {
         return normalNavigate(SplashView());
         break;
       case NavigationConstants.MAIN_VIEW:
-        return normalNavigate(MainView());
+        BitarifUser user = args.arguments;
+        return normalNavigate(MainView(user: user));
         break;
       case NavigationConstants.RECIPE_LIST_VIEW:
         return normalNavigate(RecipeListView());

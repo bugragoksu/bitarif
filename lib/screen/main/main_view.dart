@@ -3,12 +3,16 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../core/base/state/base_state.dart';
 import '../_widgets/bottom_bar/bottom_bar.dart';
+import '../authenticate/auth/model/bitarif_user.dart';
+import 'category/search/view/search_view.dart';
 import 'favourite/view/favourite_view.dart';
 import 'home/view/home_view.dart';
 import 'profile/view/profile_view.dart';
-import 'category/search/view/search_view.dart';
 
 class MainView extends StatefulWidget {
+  final BitarifUser user;
+
+  const MainView({Key key, @required this.user}) : super(key: key);
   @override
   _MainViewState createState() => _MainViewState();
 }

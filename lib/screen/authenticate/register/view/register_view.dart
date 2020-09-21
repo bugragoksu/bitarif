@@ -1,13 +1,16 @@
-import 'package:bitarif/core/init/firebase/model/firebase_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/body_column.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/firebase/model/firebase_response.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/buttons/register_button.dart';
 import '../../../_widgets/fields/auth_text_field.dart';
+import '../../auth/model/bitarif_user.dart';
 import '../viewmodel/register_view_model.dart';
 
 class RegisterView extends StatefulWidget {
@@ -89,9 +92,10 @@ class _RegisterViewState extends BaseState<RegisterView> {
             email: email,
             name: name,
             password: password,
-            onCompleted: (FirebaseResponse response) {
+            onCompleted: (FirebaseResponse response, BitarifUser user) {
               if (response.success) {
-                print("OK");
+                NavigationManager.instance.navigateToPage(
+                    path: NavigationConstants.MAIN_VIEW, data: user);
               }
             },
           ),

@@ -13,7 +13,7 @@ import '../../../core/utils/widget_utils.dart';
 import '../../authenticate/register/viewmodel/register_view_model.dart';
 
 class RegisterButton extends StatefulWidget {
-  final Function(FirebaseResponse result) onCompleted;
+  final Function(FirebaseResponse result, BitarifUser user) onCompleted;
   final String email, password, name;
   final RegisterViewModel viewModel;
   const RegisterButton(
@@ -37,14 +37,13 @@ class _RegisterButtonState extends BaseState<RegisterButton> {
       isLoading: isLoading,
       onPressed: () async {
         FirebaseResponse response = FirebaseResponse();
+        changeLoading();
         if (widget.email.isNotNulAndNotEmpty &&
             widget.password.isNotNulAndNotEmpty &&
             widget.name.isNotNulAndNotEmpty) {
-          changeLoading();
           response = await FirebaseManager.instance
               .registerWithEmailAndPassword(
                   email: widget.email.trim(), password: widget.password.trim());
-          changeLoading();
           if (response.success) {
             //register to db
             final result = await widget.viewModel.registerToDatabase(
@@ -54,11 +53,11 @@ class _RegisterButtonState extends BaseState<RegisterButton> {
                 password: widget.password.trim().toSha256);
             if (result.data is BitarifUser) {
               //success
-              print(result.data.firebaseId);
               LocaleManager.instance.setStringValue(
                   PreferencesKeys.PASSWORD, widget.password.trim().toSha256);
               LocaleManager.instance
                   .setStringValue(PreferencesKeys.EMAIL, widget.email.trim());
+              widget.onCompleted(response, result.data);
             } else {
               this.context.showSnackBar(WidgetUtils.instance
                   .buildSnackBar(context, "somethingWentWrong"));
@@ -66,13 +65,15 @@ class _RegisterButtonState extends BaseState<RegisterButton> {
           } else {
             context.showSnackBar(WidgetUtils.instance
                 .buildSnackBar(context, response.getErrorMessage()));
+            widget.onCompleted(response, null);
           }
         } else {
           context.showSnackBar(
               WidgetUtils.instance.buildSnackBar(context, "pleaseEnterFields"));
           response.success = false;
+          widget.onCompleted(response, null);
         }
-        widget.onCompleted(response);
+        changeLoading();
       },
       title: "register",
     );
