@@ -6,14 +6,17 @@ import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/column/body_column.dart';
 import '../../../../core/components/text/link_text.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/init/firebase/model/firebase_response.dart';
 import '../../../../core/init/lang/language_manager.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/buttons/facebook_sign_button.dart';
 import '../../../_widgets/buttons/forgot_password_button.dart';
 import '../../../_widgets/buttons/google_sign_button.dart';
 import '../../../_widgets/buttons/login_button.dart';
 import '../../../_widgets/fields/auth_text_field.dart';
+import '../../auth/model/bitarif_user.dart';
 import '../viewmodel/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
@@ -85,11 +88,13 @@ class _LoginViewState extends State<LoginView> {
         buildForm,
         ForgotPasswordButton(),
         LoginButton(
+          viewModel: loginViewModel,
           email: email,
           password: password,
-          onCompleted: (FirebaseResponse response) {
+          onCompleted: (FirebaseResponse response, BitarifUser user) {
             if (response.success) {
-              print("ok");
+              NavigationManager.instance.navigateToPage(
+                  path: NavigationConstants.MAIN_VIEW, data: user);
             }
           },
         ),
