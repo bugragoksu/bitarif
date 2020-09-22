@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
@@ -15,10 +16,13 @@ import '../../../_widgets/colored_gradient_divider.dart';
 import '../../../_widgets/container/animated_blog_card.dart';
 import '../../../_widgets/container/animated_recipe_card.dart';
 import '../../../_widgets/texts/body_title_text.dart';
+import '../../../_widgets/secondary_color_circular_progress.dart';
+import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../viewmodel/home_view_model.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key key}) : super(key: key);
+  final BitarifUser user;
+  const HomeView({Key key, @required this.user}) : super(key: key);
   @override
   _HomeViewState createState() => _HomeViewState();
 }
@@ -29,32 +33,43 @@ class _HomeViewState extends BaseState<HomeView> {
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
       viewModel: HomeViewModel(),
-      onModelReady: (model) {
+      onModelReady: (model) async {
         model.setContext(context);
         model.init();
         viewModel = model;
+
+        await viewModel.getBlogPosts(token: widget.user.token);
       },
       onPageBuilder: (BuildContext context, HomeViewModel value) =>
           _buildScaffold,
     );
   }
 
-  Widget get _buildScaffold => BaseWidget(
-        children: [
-          _buildTitle,
-          context.lowValue.toHeightSizedBox,
-          ColoredGradientDivider(),
-          context.normalValue.toHeightSizedBox,
-          BodyTitleText(
-            text: "getInspired",
-            haveIcon: false,
-          ),
-          context.lowValue.toHeightSizedBox,
-          AnimatedBlogCard(),
-          context.mediumValue.toHeightSizedBox,
-          ..._buildLatestRecipeSection
-        ],
-      );
+  Widget get _buildScaffold => Observer(
+      builder: (_) => !viewModel.isLoading
+          ? BaseWidget(children: _buildBodyChildrend)
+          : Scaffold(
+              body: Container(
+              alignment: Alignment.center,
+              child: SecondaryColorCircularProgress(),
+            )));
+
+  List<Widget> get _buildBodyChildrend => [
+        _buildTitle,
+        context.lowValue.toHeightSizedBox,
+        ColoredGradientDivider(),
+        context.normalValue.toHeightSizedBox,
+        BodyTitleText(
+          text: "getInspired",
+          haveIcon: false,
+        ),
+        context.lowValue.toHeightSizedBox,
+        AnimatedBlogCard(
+          blog: viewModel.blogList[0],
+        ),
+        context.mediumValue.toHeightSizedBox,
+        ..._buildLatestRecipeSection
+      ];
 
   Widget get _buildTitle => Row(children: [
         LocaleText(
@@ -67,8 +82,8 @@ class _HomeViewState extends BaseState<HomeView> {
         SizedBox(
           width: context.normalValue,
         ),
-        LocaleText(
-          value: 'Buğra',
+        Text(
+          widget.user.name,
           style: TextStyle(
               fontSize: context.normalValue * 1.25,
               color: context.theme.colorScheme.primary),

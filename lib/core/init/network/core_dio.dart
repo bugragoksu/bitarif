@@ -27,13 +27,19 @@ class CoreDio with DioMixin implements Dio, ICoreDio {
       @required T parseModel,
       dynamic data,
       Map<String, dynamic> queryParameters,
-      void Function(int, int) onReceiveProgress}) async {
+      void Function(int, int) onReceiveProgress,
+      String token}) async {
     final response = await request(path,
-        data: data, options: Options(method: type.rawValue));
+        data: data,
+        options: token != null
+            ? Options(
+                method: type.rawValue,
+                headers: {"Authorization": "Token $token"})
+            : Options(method: type.rawValue));
     switch (response.statusCode) {
       case HttpStatus.ok:
       case HttpStatus.created:
-        final model = _responseParser<R>(parseModel, response.data);
+        final model = _responseParser<R, T>(parseModel, response.data);
         return ResponseModel<R>(data: model);
       default:
         return ResponseModel(error: BaseError(response.data["message"]));

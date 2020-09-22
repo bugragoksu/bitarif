@@ -31,7 +31,7 @@ class _MainViewState extends BaseState<MainView> {
   @override
   void initState() {
     pages = [
-      HomeView(key: _homeKey),
+      HomeView(key: _homeKey, user: widget.user),
       SearchView(
         key: _searchKey,
       ),

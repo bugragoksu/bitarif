@@ -93,7 +93,7 @@ class _LoginViewState extends State<LoginView> {
           password: password,
           onCompleted: (FirebaseResponse response, BitarifUser user) {
             if (response.success) {
-              NavigationManager.instance.navigateToPage(
+              NavigationManager.instance.navigateToPageClear(
                   path: NavigationConstants.MAIN_VIEW, data: user);
             }
           },

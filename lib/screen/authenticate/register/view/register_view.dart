@@ -94,7 +94,7 @@ class _RegisterViewState extends BaseState<RegisterView> {
             password: password,
             onCompleted: (FirebaseResponse response, BitarifUser user) {
               if (response.success) {
-                NavigationManager.instance.navigateToPage(
+                NavigationManager.instance.navigateToPageClear(
                     path: NavigationConstants.MAIN_VIEW, data: user);
               }
             },

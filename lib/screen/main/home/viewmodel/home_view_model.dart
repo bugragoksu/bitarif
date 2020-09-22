@@ -1,3 +1,9 @@
+import 'package:bitarif/core/utils/widget_utils.dart';
+
+import '../../../../core/constants/enums/http_types_enum.dart';
+import '../../../../core/constants/server/server_constants.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../blog/blog_detail/model/blog.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,4 +16,35 @@ class HomeViewModel = _HomeViewModelBase with _$HomeViewModel;
 abstract class _HomeViewModelBase with Store, BaseViewModel {
   void setContext(BuildContext context) => this.context = context;
   void init() {}
+
+  @observable
+  bool isLoading = false;
+
+  @observable
+  List<BlogPost> blogList = [];
+
+  @action
+  Future<List<BlogPost>> getBlogPosts({String token}) async {
+    try {
+      isLoading = true;
+      final result = await this.coreDio.fetch<List<BlogPost>, BlogPost>(
+          ServerConstants.BLOG_LIST_ENDPOINT,
+          token: token,
+          parseModel: BlogPost(),
+          type: HttpTypes.GET);
+      if (result.data is List<BlogPost>) {
+        blogList = result.data;
+      } else {
+        this.context.showSnackBar(
+            WidgetUtils.instance.buildSnackBar(context, result.error.message));
+      }
+      return blogList;
+    } catch (e) {
+      this.context.showSnackBar(
+          WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
+      return [];
+    } finally {
+      isLoading = false;
+    }
+  }
 }

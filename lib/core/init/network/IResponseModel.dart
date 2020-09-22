@@ -3,7 +3,9 @@ abstract class IResponseModel<T> {
   IErrorModel error;
 }
 
-abstract class IErrorModel<T> {}
+abstract class IErrorModel<T> {
+  String message;
+}
 
 class ResponseModel<T> extends IResponseModel<T> {
   final T data;

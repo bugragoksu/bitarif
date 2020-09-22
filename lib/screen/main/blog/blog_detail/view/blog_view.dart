@@ -1,3 +1,4 @@
+import 'package:bitarif/screen/main/blog/blog_detail/model/blog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -5,10 +6,14 @@ import '../../../../../core/base/state/base_state.dart';
 import '../../../../../core/base/view/base_view.dart';
 import '../../../../../core/components/column/imaged_start_column.dart';
 import '../../../../../core/extensions/context_extension.dart';
+import '../../../../../core/extensions/date_extension.dart';
 import '../../../../../core/extensions/double_extension.dart';
 import '../viewmodel/blog_detail_view_model.dart';
 
 class BlogDetailView extends StatefulWidget {
+  final BlogPost blog;
+
+  const BlogDetailView({Key key, @required this.blog}) : super(key: key);
   @override
   _BlogDetailViewState createState() => _BlogDetailViewState();
 }
@@ -28,8 +33,7 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
             child: ImagedStartColumn(
           children: _buildChildren,
           isNetwork: true,
-          path:
-              "https://www.abouttimemagazine.co.uk/wp-content/uploads/2016/01/10559937_941361799269538_2577068189735280194_n.jpg",
+          path: widget.blog.imageLink,
         )),
       ),
     );
@@ -42,7 +46,7 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
         Container(
             padding: context.paddingNormal,
             alignment: Alignment.centerLeft,
-            child: Text(desc,
+            child: Text(widget.blog.text,
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -54,7 +58,7 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("MAY 11,2018"),
+            Text(widget.blog.createdDate.toParsedString),
             IconButton(
               icon: Icon(FeatherIcons.heart),
               onPressed: () {},
@@ -69,13 +73,13 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Manger",
+            Text(widget.blog.title,
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: context.mediumValue)),
             context.lowValue.toHeightSizedBox,
-            Text("Confession of a bad blogger",
+            Text(widget.blog.desc,
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -85,11 +89,4 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
           ],
         ),
       );
-
-  String desc = """
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rhoncus erat quis vulputate sodales. Duis id blandit diam. In ac blandit justo, sit amet ultricies tortor. Maecenas ornare ipsum in nisl ornare interdum. Aliquam erat volutpat. Duis tempus scelerisque viverra. Vestibulum placerat varius diam in ullamcorper. Morbi ac odio posuere, rhoncus mauris in, ullamcorper nibh. Etiam malesuada et est nec fermentum. Cras ornare ultrices pharetra. Maecenas malesuada, massa eu sodales fermentum, augue dui vehicula nisi, ut ullamcorper erat elit eget nisl. Integer ante massa, tincidunt id aliquam eget, bibendum id odio. Nunc imperdiet felis sit amet odio sodales, non malesuada felis consequat.
-
-  Nunc bibendum sem nulla, malesuada tincidunt risus vulputate ut. Integer a tempor eros. Nam tortor odio, elementum id tristique et, dictum in risus. Nam tempor maximus dapibus. Donec quis magna nisl. Sed eget mauris ac tellus laoreet dictum quis a tortor. Donec at metus ac felis hendrerit efficitur. Donec lobortis ante massa, sit amet suscipit eros vestibulum ut. Nulla consectetur pulvinar tincidunt. Nam eros orci, fringilla vel auctor sed, tempor eu velit. Nulla tincidunt diam in augue faucibus, ac interdum enim sodales
-  
-  """;
 }

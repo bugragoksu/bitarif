@@ -15,9 +15,14 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
   void setContext(BuildContext context) => this.context = context;
   void init() {}
 
+  @observable
+  bool isLoading = false;
+
+  @action
   Future<IResponseModel<BitarifUser>> loginToDatabase(
       {String firebaseId, String email, String password, String name}) async {
     try {
+      isLoading = true;
       final result = await this.coreDio.fetch<BitarifUser, BitarifUser>(
           ServerConstants.USER_LOGIN_ENDPOINT,
           type: HttpTypes.POST,
@@ -30,6 +35,8 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     } catch (e) {
       debugPrint(e.toString());
       return null;
+    } finally {
+      isLoading = false;
     }
   }
 }

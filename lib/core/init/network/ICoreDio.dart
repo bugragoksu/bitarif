@@ -9,6 +9,7 @@ abstract class ICoreDio {
       {@required HttpTypes type,
       @required T parseModel,
       dynamic data,
+      String token,
       Map<String, dynamic> queryParameters,
       void Function(int, int) onReceiveProgress});
 }
