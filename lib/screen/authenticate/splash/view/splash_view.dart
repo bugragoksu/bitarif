@@ -1,3 +1,5 @@
+import 'package:bitarif/screen/authenticate/auth/model/bitarif_user.dart';
+
 import '../../../../core/constants/app/app_constants.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
@@ -23,9 +25,14 @@ class _SplashViewState extends BaseState<SplashView> {
         model.setContext(context);
         model.init();
         splashViewModel = model;
-        await Future.delayed(Duration(seconds: 3));
-        NavigationManager.instance
-            .navigateToPageClear(path: NavigationConstants.AUTH_VIEW);
+        final result = await splashViewModel.initLogin();
+        if (result.data is BitarifUser) {
+          NavigationManager.instance.navigateToPageClear(
+              path: NavigationConstants.MAIN_VIEW, data: result.data);
+        } else {
+          NavigationManager.instance
+              .navigateToPageClear(path: NavigationConstants.AUTH_VIEW);
+        }
       },
       onPageBuilder: (BuildContext context, SplashViewModel value) =>
           _buildScaffold,

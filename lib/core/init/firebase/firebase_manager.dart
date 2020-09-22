@@ -11,6 +11,18 @@ class FirebaseManager extends IFirebaseManager {
   }
 
   FirebaseManager._init();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  FirebaseResponse getCurrentUser() {
+    FirebaseResponse response = FirebaseResponse();
+    if (this._auth.currentUser != null) {
+      response.firebaseUser = this._auth.currentUser;
+      response.success = true;
+    } else {
+      response.success = false;
+    }
+    return response;
+  }
 
   Future<FirebaseResponse> registerWithEmailAndPassword(
       {String email, String password}) async {
