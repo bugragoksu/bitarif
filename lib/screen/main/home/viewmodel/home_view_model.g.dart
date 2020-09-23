@@ -39,6 +39,21 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
     });
   }
 
+  final _$recipeListAtom = Atom(name: '_HomeViewModelBase.recipeList');
+
+  @override
+  List<Recipe> get recipeList {
+    _$recipeListAtom.reportRead();
+    return super.recipeList;
+  }
+
+  @override
+  set recipeList(List<Recipe> value) {
+    _$recipeListAtom.reportWrite(value, super.recipeList, () {
+      super.recipeList = value;
+    });
+  }
+
   final _$getBlogPostsAsyncAction =
       AsyncAction('_HomeViewModelBase.getBlogPosts');
 
@@ -48,11 +63,21 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
         .run(() => super.getBlogPosts(token: token));
   }
 
+  final _$getRecipeListAsyncAction =
+      AsyncAction('_HomeViewModelBase.getRecipeList');
+
+  @override
+  Future<List<Recipe>> getRecipeList({String token}) {
+    return _$getRecipeListAsyncAction
+        .run(() => super.getRecipeList(token: token));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-blogList: ${blogList}
+blogList: ${blogList},
+recipeList: ${recipeList}
     ''';
   }
 }

@@ -6,7 +6,6 @@ class BitarifUser extends BaseModel {
       this.follower,
       this.firebaseId,
       this.email,
-      this.password,
       this.name,
       this.profilePic,
       this.createdDate,
@@ -16,7 +15,6 @@ class BitarifUser extends BaseModel {
   final List<Follower> follower;
   final String firebaseId;
   final String email;
-  final String password;
   final String name;
   final dynamic profilePic;
   final DateTime createdDate;
@@ -27,20 +25,19 @@ class BitarifUser extends BaseModel {
         "follower": List<dynamic>.from(follower.map((x) => x.toJson())),
         "firebase_id": firebaseId,
         "email": email,
-        "password": password,
         "name": name,
         "profile_pic": profilePic,
         "token": token,
         "created_date": createdDate.toIso8601String(),
       };
 
+  @override
   fromJson(Map<String, dynamic> json) => BitarifUser(
         id: json["id"],
         follower: List<Follower>.from(
             json["follower"].map((x) => Follower.fromJson(x))),
         firebaseId: json["firebase_id"],
         email: json["email"],
-        password: json["password"],
         name: json["name"],
         profilePic: json["profile_pic"],
         token: json["token"],

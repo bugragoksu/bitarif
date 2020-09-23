@@ -8,12 +8,13 @@ import '../../../../../core/extensions/context_extension.dart';
 import '../../../../../core/extensions/double_extension.dart';
 import '../../../../_widgets/card/recipe_cooking_info_card.dart';
 import '../../../../_widgets/container/title_gradient_border_container.dart';
+import '../model/recipe_model.dart';
 import '../viewmodel/recipe_detail_view_model.dart';
 
 class RecipeDetailView extends StatefulWidget {
-  final String url, title;
+  final Recipe recipe;
 
-  const RecipeDetailView({Key key, this.url, this.title}) : super(key: key);
+  const RecipeDetailView({Key key, @required this.recipe}) : super(key: key);
   @override
   _RecipeDetailViewState createState() => _RecipeDetailViewState();
 }
@@ -35,7 +36,7 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
           child: ImagedStartColumn(
             children: _buildChildren,
             isNetwork: true,
-            path: widget.url,
+            path: widget.recipe.imageUrl,
           ),
         ),
       ),
@@ -44,16 +45,16 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
 
   List<Widget> get _buildChildren => [
         context.mediumValue.toHeightSizedBox,
-        TitleGradientBorderContainer(title: "Breakfast"),
+        TitleGradientBorderContainer(title: widget.recipe.category[0].name),
         context.lowValue.toHeightSizedBox,
         _buildRecipeTitle,
         context.lowValue.toHeightSizedBox,
         Divider(),
         context.lowValue.toHeightSizedBox,
         RecipeCookingInfoCard(
-          cookingTime: "30m",
-          difficulty: "Easy",
-          serving: "3-4",
+          cookingTime: widget.recipe.time,
+          difficulty: widget.recipe.difficulty.name,
+          serving: widget.recipe.serving,
         ),
         context.lowValue.toHeightSizedBox,
         Divider(),
@@ -64,7 +65,16 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
             widget: Container(
                 alignment: Alignment.centerLeft,
                 padding: context.paddingLow,
-                child: Text("* 1 kaşık çay\n* 1 bardak su")),
+                child: ListView.builder(
+                    padding: EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    itemCount: widget.recipe.ingredients.length,
+                    itemBuilder: (_, index) => Text(
+                        widget.recipe.ingredients[index].quantity.amount +
+                            " " +
+                            widget.recipe.ingredients[index].quantity.name +
+                            " " +
+                            widget.recipe.ingredients[index].name))),
           ),
         ),
         context.lowValue.toHeightSizedBox,
@@ -75,14 +85,14 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
             widget: Container(
                 alignment: Alignment.centerLeft,
                 padding: context.paddingLow,
-                child: Text("* 1 kaşık çay\n* 1 bardak su")),
+                child: Text(widget.recipe.desc)),
           ),
         ),
       ];
 
   Widget get _buildRecipeTitle => Padding(
         padding: context.paddingNormal,
-        child: Text(widget.title,
+        child: Text(widget.recipe.title,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: context.mediumValue)),

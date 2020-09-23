@@ -1,4 +1,5 @@
 import 'package:bitarif/core/utils/widget_utils.dart';
+import 'package:bitarif/screen/main/recipe/recipe_detail.dart/model/recipe_model.dart';
 
 import '../../../../core/constants/enums/http_types_enum.dart';
 import '../../../../core/constants/server/server_constants.dart';
@@ -23,6 +24,9 @@ abstract class _HomeViewModelBase with Store, BaseViewModel {
   @observable
   List<BlogPost> blogList = [];
 
+  @observable
+  List<Recipe> recipeList = [];
+
   @action
   Future<List<BlogPost>> getBlogPosts({String token}) async {
     try {
@@ -39,6 +43,31 @@ abstract class _HomeViewModelBase with Store, BaseViewModel {
             WidgetUtils.instance.buildSnackBar(context, result.error.message));
       }
       return blogList;
+    } catch (e) {
+      this.context.showSnackBar(
+          WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
+      return [];
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  @action
+  Future<List<Recipe>> getRecipeList({String token}) async {
+    try {
+      isLoading = true;
+      final result = await this.coreDio.fetch<List<Recipe>, Recipe>(
+          ServerConstants.RECIPE_LIST_ENDPOINT,
+          token: token,
+          parseModel: Recipe(),
+          type: HttpTypes.GET);
+      if (result.data is List<Recipe>) {
+        recipeList = result.data;
+      } else {
+        this.context.showSnackBar(
+            WidgetUtils.instance.buildSnackBar(context, result.error.message));
+      }
+      return recipeList;
     } catch (e) {
       this.context.showSnackBar(
           WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));

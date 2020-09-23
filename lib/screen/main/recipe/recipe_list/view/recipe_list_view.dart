@@ -8,9 +8,16 @@ import '../../../../../core/extensions/double_extension.dart';
 import '../../../../_widgets/columns/three_widget_title.dart';
 import '../../../../_widgets/container/animated_recipe_card.dart';
 import '../../../../_widgets/rows/search_bar_row.dart';
+import '../../recipe_detail.dart/model/recipe_model.dart';
 import '../viewmodel/recipe_list_view_model.dart';
 
 class RecipeListView extends StatefulWidget {
+  final List<Recipe> recipeList;
+  final String title;
+
+  const RecipeListView(
+      {Key key, @required this.recipeList, @required this.title})
+      : super(key: key);
   @override
   _RecipeListViewState createState() => _RecipeListViewState();
 }
@@ -48,7 +55,7 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
         children: [
           ThreeWidgetTitle(
             isVisibleDoneText: false,
-            title: "Breakfast",
+            title: widget.title,
           ),
           SearchBarRow(
             searchFieldController: _searchFieldController,
@@ -69,6 +76,9 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
         children: [..._buildItems],
       );
 
-  List<Widget> get _buildItems =>
-      List.generate(9, (index) => AnimatedRecipeCard());
+  List<Widget> get _buildItems => List.generate(
+      widget.recipeList.length,
+      (index) => AnimatedRecipeCard(
+            recipe: widget.recipeList[index],
+          ));
 }

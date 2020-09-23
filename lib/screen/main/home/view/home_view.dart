@@ -15,8 +15,8 @@ import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
 import '../../../_widgets/container/animated_blog_card.dart';
 import '../../../_widgets/container/animated_recipe_card.dart';
-import '../../../_widgets/texts/body_title_text.dart';
 import '../../../_widgets/secondary_color_circular_progress.dart';
+import '../../../_widgets/texts/body_title_text.dart';
 import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../viewmodel/home_view_model.dart';
 
@@ -39,6 +39,7 @@ class _HomeViewState extends BaseState<HomeView> {
         viewModel = model;
 
         await viewModel.getBlogPosts(token: widget.user.token);
+        await viewModel.getRecipeList(token: widget.user.token);
       },
       onPageBuilder: (BuildContext context, HomeViewModel value) =>
           _buildScaffold,
@@ -103,8 +104,12 @@ class _HomeViewState extends BaseState<HomeView> {
             text: "latestRecipes",
             haveIcon: true,
             onPressed: () {
-              NavigationManager.instance
-                  .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+              NavigationManager.instance.navigateToPage(
+                  path: NavigationConstants.RECIPE_LIST_VIEW,
+                  data: {
+                    "recipes": viewModel.recipeList,
+                    "title": "allRecipes"
+                  });
             }),
         Container(
           height: context.height / 3,
@@ -113,14 +118,10 @@ class _HomeViewState extends BaseState<HomeView> {
             itemCount: 4,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) => AnimatedRecipeCard(),
+            itemBuilder: (_, index) => AnimatedRecipeCard(
+              recipe: viewModel.recipeList[index],
+            ),
           ),
         ),
-      ];
-  List<String> get urlList => [
-        "https://shemins.scdn2.secure.raxcdn.com/wp-content/uploads/2018/02/Shemins-Lucknowi-Biryani.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSHFyfu99I-xpDA8ZZyeXL1KaixY1E9oEkVSQ&usqp=CAU",
-        "https://img.delicious.com.au/bsUYtcs3/w759-h506-cfill/del/2019/02/zucchini-spaghetti-with-bolognese-101168-2.jpg",
-        "https://www.dinneratthezoo.com/wp-content/uploads/2019/04/chicken-marinade-11.jpg"
       ];
 }
