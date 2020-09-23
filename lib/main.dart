@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/app/app_constants.dart';
@@ -13,6 +14,9 @@ import 'core/init/notifier/provider_list.dart';
 import 'core/init/notifier/theme_notifier.dart';
 
 Future<void> main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   WidgetsFlutterBinding.ensureInitialized();
   LocaleManager.preferencesInit();
   await Firebase.initializeApp();
@@ -30,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: Provider.of<ThemeNotifier>(context, listen: false).currentTheme,
         onGenerateRoute: NavigationRoute.instance.generateRoute,
         initialRoute: NavigationConstants.SPLASH_VIEW,

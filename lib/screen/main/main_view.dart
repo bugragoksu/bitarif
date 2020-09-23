@@ -18,12 +18,6 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends BaseState<MainView> {
-  final PageStorageBucket bucket = PageStorageBucket();
-  final Key _homeKey = PageStorageKey('homeView');
-  final Key _searchKey = PageStorageKey('searchView');
-  final Key _favouriteKey = PageStorageKey('favouriteView');
-  final Key _profileKey = PageStorageKey('profileView');
-
   List<Widget> pages;
   Widget currentPage;
   IconData selectedIcon;
@@ -31,14 +25,10 @@ class _MainViewState extends BaseState<MainView> {
   @override
   void initState() {
     pages = [
-      HomeView(key: _homeKey, user: widget.user),
-      SearchView(
-        key: _searchKey,
-      ),
-      FavouriteView(
-        key: _favouriteKey,
-      ),
-      ProfileView(key: _profileKey)
+      HomeView(user: widget.user),
+      SearchView(),
+      FavouriteView(),
+      ProfileView()
     ];
     currentPage = pages[0];
     selectedIcon = iconList[0];
@@ -52,10 +42,7 @@ class _MainViewState extends BaseState<MainView> {
         bottomNavigationBar: _buildBottomNavigationBar, body: _buildBody);
   }
 
-  Widget get _buildBody => PageStorage(
-        child: currentPage,
-        bucket: bucket,
-      );
+  Widget get _buildBody => IndexedStack(children: pages, index: currentIndex);
 
   Widget get _buildBottomNavigationBar => BottomBar(
         selectedIcon: selectedIcon,
