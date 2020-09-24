@@ -39,7 +39,8 @@ class NavigationRoute {
         return normalNavigate(NewRecipeView());
         break;
       case NavigationConstants.CATEGORIES:
-        return normalNavigate(CategoryListView());
+        return normalNavigate(
+            CategoryListView(categoryList: args.arguments as List<Category>));
         break;
       case NavigationConstants.INSPIRATIONS:
         return normalNavigate(BlogListView());

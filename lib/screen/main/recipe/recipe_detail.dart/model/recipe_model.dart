@@ -79,7 +79,7 @@ class Recipe extends BaseModel {
   fromJson(Map<String, Object> json) => Recipe.fromJson(json);
 }
 
-class Category {
+class Category extends BaseModel {
   Category({
     this.id,
     this.name,
@@ -101,9 +101,12 @@ class Category {
         "name": name,
         "image_url": imageUrl,
       };
+
+  @override
+  fromJson(Map<String, Object> json) => Category.fromJson(json);
 }
 
-class Difficulty {
+class Difficulty extends BaseModel {
   Difficulty({
     this.id,
     this.name,
@@ -121,9 +124,11 @@ class Difficulty {
         "id": id,
         "name": name,
       };
+  @override
+  fromJson(Map<String, Object> json) => Difficulty.fromJson(json);
 }
 
-class Ingredient {
+class Ingredient extends BaseModel {
   Ingredient({
     this.id,
     this.quantity,
@@ -145,9 +150,11 @@ class Ingredient {
         "quantity": quantity.toJson(),
         "name": name,
       };
+  @override
+  fromJson(Map<String, Object> json) => Ingredient.fromJson(json);
 }
 
-class Quantity {
+class Quantity extends BaseModel {
   Quantity({
     this.id,
     this.name,
@@ -169,4 +176,6 @@ class Quantity {
         "name": name,
         "amount": amount,
       };
+  @override
+  fromJson(Map<String, Object> json) => Quantity.fromJson(json);
 }

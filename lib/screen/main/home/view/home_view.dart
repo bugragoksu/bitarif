@@ -12,10 +12,10 @@ import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../../core/init/lang/language_manager.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
+import '../../../_widgets/circular_prgress_with_scaffold.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
 import '../../../_widgets/container/animated_blog_card.dart';
 import '../../../_widgets/container/animated_recipe_card.dart';
-import '../../../_widgets/secondary_color_circular_progress.dart';
 import '../../../_widgets/texts/body_title_text.dart';
 import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../viewmodel/home_view_model.dart';
@@ -49,11 +49,7 @@ class _HomeViewState extends BaseState<HomeView> {
   Widget get _buildScaffold => Observer(
       builder: (_) => !viewModel.isLoading
           ? BaseWidget(children: _buildBodyChildrend)
-          : Scaffold(
-              body: Container(
-              alignment: Alignment.center,
-              child: SecondaryColorCircularProgress(),
-            )));
+          : ScaffoldCircularProgress());
 
   List<Widget> get _buildBodyChildrend => [
         _buildTitle,

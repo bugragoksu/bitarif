@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../../core/base/state/base_state.dart';
 import '../../../../../core/base/view/base_view.dart';
@@ -10,13 +11,15 @@ import '../../../../../core/extensions/context_extension.dart';
 import '../../../../../core/extensions/double_extension.dart';
 import '../../../../../core/init/navigation/navigation_manager.dart';
 import '../../../../_widgets/card/categorie_card.dart';
+import '../../../../_widgets/circular_prgress_with_scaffold.dart';
 import '../../../../_widgets/colored_gradient_divider.dart';
 import '../../../../_widgets/rows/search_bar_row.dart';
 import '../../../../_widgets/texts/clickable_icon_text.dart';
 import '../viewmodel/search_view_model.dart';
 
 class SearchView extends StatefulWidget {
-  SearchView({Key key}) : super(key: key);
+  final String token;
+  SearchView({Key key, @required this.token}) : super(key: key);
   @override
   _SearchViewState createState() => _SearchViewState();
 }
@@ -41,25 +44,29 @@ class _SearchViewState extends BaseState<SearchView> {
   Widget build(BuildContext context) {
     return BaseView<SearchViewModel>(
       viewModel: SearchViewModel(),
-      onModelReady: (model) {
+      onModelReady: (model) async {
         model.setContext(context);
         model.init();
         viewModel = model;
+        await viewModel.getCategoryList(token: widget.token);
       },
       onPageBuilder: (BuildContext context, SearchViewModel value) =>
           _buildScaffold,
     );
   }
 
-  Widget get _buildScaffold => BaseWidget(
-        children: [
-          ..._buildHeadLineSection,
-          context.mediumValue.toHeightSizedBox,
-          _buildCategories,
-          context.mediumValue.toHeightSizedBox,
-          ..._buildAllTextsSection,
-        ],
-      );
+  Widget get _buildScaffold => Observer(
+      builder: (BuildContext context) => viewModel.isLoading
+          ? ScaffoldCircularProgress()
+          : BaseWidget(
+              children: [
+                ..._buildHeadLineSection,
+                context.mediumValue.toHeightSizedBox,
+                _buildCategories,
+                context.mediumValue.toHeightSizedBox,
+                ..._buildAllTextsSection,
+              ],
+            ));
 
   List<Widget> get _buildHeadLineSection => [
         LocaleText(
@@ -94,16 +101,17 @@ class _SearchViewState extends BaseState<SearchView> {
               NavigationManager.instance
                   .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
             },
-            title: "Breakfast",
-            url: "https://img.icons8.com/ios/100/000000/sunny-side-up-eggs.png",
+            title: viewModel.categoryList[index].name,
+            url: viewModel.categoryList[index].imageUrl,
           ));
 
   List<Widget> get _buildAllTextsSection => [
         ClickableIconText(
           icon: FeatherIcons.chevronRight,
           onPressed: () {
-            NavigationManager.instance
-                .navigateToPage(path: NavigationConstants.CATEGORIES);
+            NavigationManager.instance.navigateToPage(
+                path: NavigationConstants.CATEGORIES,
+                data: viewModel.categoryList);
           },
           text: "allCategories",
         ),

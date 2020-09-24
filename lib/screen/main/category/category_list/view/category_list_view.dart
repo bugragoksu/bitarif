@@ -9,9 +9,14 @@ import '../../../../../core/extensions/double_extension.dart';
 import '../../../../../core/init/navigation/navigation_manager.dart';
 import '../../../../_widgets/card/categorie_card.dart';
 import '../../../../_widgets/columns/three_widget_title.dart';
+import '../../../recipe/recipe_detail.dart/model/recipe_model.dart';
 import '../viewmodel/category_list_view_model.dart';
 
 class CategoryListView extends StatefulWidget {
+  final List<Category> categoryList;
+
+  const CategoryListView({Key key, @required this.categoryList})
+      : super(key: key);
   @override
   _CategoryListViewState createState() => _CategoryListViewState();
 }
@@ -55,13 +60,13 @@ class _CategoryListViewState extends BaseState<CategoryListView> {
       );
 
   List<Widget> get _buildItems => List.generate(
-      15,
+      widget.categoryList.length,
       (index) => CategorieCard(
             onPressed: () {
               NavigationManager.instance
                   .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
             },
-            title: "Breakfast",
-            url: "https://img.icons8.com/ios/100/000000/sunny-side-up-eggs.png",
+            title: widget.categoryList[index].name,
+            url: widget.categoryList[index].imageUrl,
           ));
 }

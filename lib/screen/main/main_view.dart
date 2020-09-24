@@ -26,7 +26,9 @@ class _MainViewState extends BaseState<MainView> {
   void initState() {
     pages = [
       HomeView(user: widget.user),
-      SearchView(),
+      SearchView(
+        token: widget.user.token,
+      ),
       FavouriteView(),
       ProfileView()
     ];
