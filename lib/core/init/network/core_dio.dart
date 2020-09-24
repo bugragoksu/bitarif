@@ -31,6 +31,7 @@ class CoreDio with DioMixin implements Dio, ICoreDio {
       String token}) async {
     final response = await request(path,
         data: data,
+        queryParameters: queryParameters,
         options: token != null
             ? Options(
                 method: type.rawValue,

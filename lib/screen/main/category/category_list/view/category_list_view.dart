@@ -63,8 +63,12 @@ class _CategoryListViewState extends BaseState<CategoryListView> {
       widget.categoryList.length,
       (index) => CategorieCard(
             onPressed: () {
-              NavigationManager.instance
-                  .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+              NavigationManager.instance.navigateToPage(
+                  path: NavigationConstants.RECIPE_LIST_VIEW,
+                  data: {
+                    "search": widget.categoryList[index].name,
+                    "title": widget.categoryList[index].name
+                  });
             },
             title: widget.categoryList[index].name,
             url: widget.categoryList[index].imageUrl,

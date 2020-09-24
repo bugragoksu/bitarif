@@ -98,8 +98,12 @@ class _SearchViewState extends BaseState<SearchView> {
       9,
       (index) => CategorieCard(
             onPressed: () {
-              NavigationManager.instance
-                  .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+              NavigationManager.instance.navigateToPage(
+                  path: NavigationConstants.RECIPE_LIST_VIEW,
+                  data: {
+                    "search": viewModel.categoryList[index].name,
+                    "title": viewModel.categoryList[index].name
+                  });
             },
             title: viewModel.categoryList[index].name,
             url: viewModel.categoryList[index].imageUrl,
@@ -119,8 +123,9 @@ class _SearchViewState extends BaseState<SearchView> {
         ClickableIconText(
           icon: FeatherIcons.chevronRight,
           onPressed: () {
-            NavigationManager.instance
-                .navigateToPage(path: NavigationConstants.RECIPE_LIST_VIEW);
+            NavigationManager.instance.navigateToPage(
+                path: NavigationConstants.RECIPE_LIST_VIEW,
+                data: {"search": "", "title": "allRecipes"});
           },
           text: "allRecipes",
         ),

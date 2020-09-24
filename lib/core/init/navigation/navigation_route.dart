@@ -31,8 +31,8 @@ class NavigationRoute {
         break;
       case NavigationConstants.RECIPE_LIST_VIEW:
         return normalNavigate(RecipeListView(
-          recipeList: args.arguments["recipes"] as List<Recipe>,
           title: args.arguments["title"] as String,
+          searchValue: args.arguments["search"] as String,
         ));
         break;
       case NavigationConstants.NEW_RECIPE:

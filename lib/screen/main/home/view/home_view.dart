@@ -102,10 +102,7 @@ class _HomeViewState extends BaseState<HomeView> {
             onPressed: () {
               NavigationManager.instance.navigateToPage(
                   path: NavigationConstants.RECIPE_LIST_VIEW,
-                  data: {
-                    "recipes": viewModel.recipeList,
-                    "title": "allRecipes"
-                  });
+                  data: {"search": "", "title": "allRecipes"});
             }),
         Container(
           height: context.height / 3,
