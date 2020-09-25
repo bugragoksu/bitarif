@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../core/base/state/base_state.dart';
+import '../../core/init/lang/language_manager.dart';
 import '../_widgets/bottom_bar/bottom_bar.dart';
 import '../authenticate/auth/model/bitarif_user.dart';
 import 'category/search/view/search_view.dart';
@@ -18,20 +20,11 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends BaseState<MainView> {
-  List<Widget> pages;
   Widget currentPage;
   IconData selectedIcon;
   int currentIndex;
   @override
   void initState() {
-    pages = [
-      HomeView(user: widget.user),
-      SearchView(
-        token: widget.user.token,
-      ),
-      FavouriteView(),
-      ProfileView()
-    ];
     currentPage = pages[0];
     selectedIcon = iconList[0];
     currentIndex = 0;
@@ -43,6 +36,22 @@ class _MainViewState extends BaseState<MainView> {
     return Scaffold(
         bottomNavigationBar: _buildBottomNavigationBar, body: _buildBody);
   }
+
+  List<Widget> get pages => [
+        HomeView(
+          user: widget.user,
+          changeLanguageOnPressed: () {
+            setState(() {
+              context.locale = LanguageManager.instance.changeLocale();
+            });
+          },
+        ),
+        SearchView(
+          token: widget.user.token,
+        ),
+        FavouriteView(),
+        ProfileView()
+      ];
 
   Widget get _buildBody => IndexedStack(children: pages, index: currentIndex);
 

@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -10,7 +9,6 @@ import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
-import '../../../../core/init/lang/language_manager.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/circular_prgress_with_scaffold.dart';
 import '../../../_widgets/colored_gradient_divider.dart';
@@ -21,8 +19,11 @@ import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../viewmodel/home_view_model.dart';
 
 class HomeView extends StatefulWidget {
+  final VoidCallback changeLanguageOnPressed;
   final BitarifUser user;
-  const HomeView({Key key, @required this.user}) : super(key: key);
+  const HomeView(
+      {Key key, @required this.user, @required this.changeLanguageOnPressed})
+      : super(key: key);
   @override
   _HomeViewState createState() => _HomeViewState();
 }
@@ -89,9 +90,7 @@ class _HomeViewState extends BaseState<HomeView> {
         IconButton(
           color: context.theme.colorScheme.primary,
           icon: Icon(FeatherIcons.globe),
-          onPressed: () {
-            context.locale = LanguageManager.instance.changeLocale();
-          },
+          onPressed: widget.changeLanguageOnPressed,
         )
       ]);
 
