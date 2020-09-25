@@ -43,7 +43,9 @@ class NavigationRoute {
             CategoryListView(categoryList: args.arguments as List<Category>));
         break;
       case NavigationConstants.INSPIRATIONS:
-        return normalNavigate(BlogListView());
+        return normalNavigate(BlogListView(
+          token: args.arguments as String,
+        ));
         break;
       case NavigationConstants.FILTER:
         return normalNavigate(FilterView());

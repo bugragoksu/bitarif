@@ -133,8 +133,9 @@ class _SearchViewState extends BaseState<SearchView> {
         ClickableIconText(
           icon: FeatherIcons.chevronRight,
           onPressed: () {
-            NavigationManager.instance
-                .navigateToPage(path: NavigationConstants.INSPIRATIONS);
+            NavigationManager.instance.navigateToPage(
+                path: NavigationConstants.INSPIRATIONS,
+                data: widget.token);
           },
           text: "allInspirations",
         )
