@@ -7,8 +7,12 @@ import '../fields/search_field.dart';
 
 class SearchBarRow extends StatelessWidget {
   final TextEditingController searchFieldController;
+  final VoidCallback onEditingComplete;
 
-  const SearchBarRow({Key key, @required this.searchFieldController})
+  const SearchBarRow(
+      {Key key,
+      @required this.searchFieldController,
+      @required this.onEditingComplete})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,7 @@ class SearchBarRow extends StatelessWidget {
         Expanded(
           flex: 4,
           child: SearchField(
+            onEditingComplete: onEditingComplete,
             controller: searchFieldController,
           ),
         ),

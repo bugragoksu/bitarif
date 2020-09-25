@@ -7,8 +7,13 @@ import '../../../core/extensions/string_extension.dart';
 class SearchField extends StatelessWidget {
   final TextEditingController controller;
   final String Function(String) validator;
+  final VoidCallback onEditingComplete;
 
-  const SearchField({Key key, @required this.controller, this.validator})
+  const SearchField(
+      {Key key,
+      @required this.controller,
+      this.validator,
+      @required this.onEditingComplete})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,7 @@ class SearchField extends StatelessWidget {
                 hintColor: context.theme.colorScheme.primary,
                 primaryColor: context.theme.colorScheme.primary),
             child: TextFormField(
+              onEditingComplete: onEditingComplete,
               controller: controller,
               cursorColor: context.theme.colorScheme.primary,
               decoration: InputDecoration(

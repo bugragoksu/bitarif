@@ -75,6 +75,14 @@ class _SearchViewState extends BaseState<SearchView> {
                 fontWeight: FontWeight.bold, fontSize: context.mediumValue)),
         context.lowValue.toHeightSizedBox,
         SearchBarRow(
+          onEditingComplete: () {
+            NavigationManager.instance.navigateToPage(
+                path: NavigationConstants.RECIPE_LIST_VIEW,
+                data: {
+                  "title": "search",
+                  "search": _searchFieldController.text.trim()
+                });
+          },
           searchFieldController: _searchFieldController,
         ),
         context.lowValue.toHeightSizedBox,
@@ -134,8 +142,7 @@ class _SearchViewState extends BaseState<SearchView> {
           icon: FeatherIcons.chevronRight,
           onPressed: () {
             NavigationManager.instance.navigateToPage(
-                path: NavigationConstants.INSPIRATIONS,
-                data: widget.token);
+                path: NavigationConstants.INSPIRATIONS, data: widget.token);
           },
           text: "allInspirations",
         )

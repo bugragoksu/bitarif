@@ -66,6 +66,7 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
                   title: widget.title,
                 ),
                 SearchBarRow(
+                  onEditingComplete: () {},
                   searchFieldController: _searchFieldController,
                 ),
                 context.normalValue.toHeightSizedBox,
