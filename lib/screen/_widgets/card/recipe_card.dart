@@ -1,16 +1,26 @@
+import 'package:bitarif/core/constants/enums/preferences_keys_enum.dart';
 import 'package:bitarif/core/extensions/double_extension.dart';
+import 'package:bitarif/core/init/cache/locale_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/card/stack_image_card.dart';
 import '../../../core/extensions/context_extension.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   final String path;
+  final int recipeId;
 
   const RecipeCard({
     Key key,
     @required this.path,
+    @required this.recipeId,
   }) : super(key: key);
+
+  @override
+  _RecipeCardState createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +30,7 @@ class RecipeCard extends StatelessWidget {
           isNetwork: true,
           height: context.height / 4,
           width: context.width / 2,
-          path: path,
+          path: widget.path,
           child: Positioned(
             left: 0,
             right: context.lowValue,
@@ -30,9 +40,13 @@ class RecipeCard extends StatelessWidget {
               children: [
                 IconButton(
                   color: context.theme.colorScheme.background,
-                  icon: Icon(Icons.favorite_border),
+                  icon: Icon(isFav() ? Icons.favorite : Icons.favorite_border),
                   iconSize: 18,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      isFav()?delFavList():addFavList();
+                    });
+                  },
                 ),
                 Text("45 Min",
                     style: TextStyle(
@@ -53,5 +67,42 @@ class RecipeCard extends StatelessWidget {
         )
       ],
     );
+  }
+
+  String getFavList() {
+    return LocaleManager.instance.getStringValue(PreferencesKeys.FAV_RECIPES);
+  }
+
+  void addFavList() {
+    String favList = getFavList();
+    favList += "${widget.recipeId},";
+    LocaleManager.instance.setStringValue(PreferencesKeys.FAV_RECIPES, favList);
+  }
+
+  void delFavList() {
+    String favList = getFavList();
+    String newFav = "";
+    List<String> recipeIdList = favList.split(',');
+    for (var i = 0; i < recipeIdList.length; i++) {
+      if (!recipeIdList[i].contains(widget.recipeId.toString())) {
+        newFav += recipeIdList[i] + ",";
+      }
+    }
+    LocaleManager.instance.setStringValue(PreferencesKeys.FAV_RECIPES, newFav);
+  }
+
+  bool isFav() {
+    bool result = false;
+    String favList = getFavList();
+
+    List<String> recipeIdList = favList.split(',');
+    for (var i = 0; i < recipeIdList.length; i++) {
+      if (recipeIdList[i].contains(widget.recipeId.toString())) {
+        result = true;
+        break;
+      }
+    }
+
+    return result;
   }
 }

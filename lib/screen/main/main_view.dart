@@ -49,7 +49,7 @@ class _MainViewState extends BaseState<MainView> {
         SearchView(
           token: widget.user.token,
         ),
-        FavouriteView(),
+        FavouriteView(token: widget.user.token),
         ProfileView()
       ];
 

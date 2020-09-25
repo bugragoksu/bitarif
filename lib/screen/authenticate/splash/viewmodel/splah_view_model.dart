@@ -1,3 +1,5 @@
+import 'package:bitarif/core/base/model/base_error.dart';
+
 import '../../../../core/constants/enums/http_types_enum.dart';
 import '../../../../core/constants/enums/preferences_keys_enum.dart';
 import '../../../../core/constants/server/server_constants.dart';
@@ -39,10 +41,10 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
               "password": password,
             });
       } else {
-        result.error.message = "No current user";
+        result.error = BaseError("No current user");
       }
     } catch (e) {
-      result.error.message = e.toString();
+      result.error = BaseError(e.toString());
     }
     return result;
   }

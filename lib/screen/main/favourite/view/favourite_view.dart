@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
@@ -8,10 +9,12 @@ import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../../core/extensions/string_extension.dart';
+import '../../../_widgets/secondary_color_circular_progress.dart';
 import '../viewmodel/favourite_view_model.dart';
 
 class FavouriteView extends StatefulWidget {
-  FavouriteView({Key key}) : super(key: key);
+  final String token;
+  FavouriteView({Key key, @required this.token}) : super(key: key);
   @override
   _FavouriteViewState createState() => _FavouriteViewState();
 }
@@ -19,17 +22,26 @@ class FavouriteView extends StatefulWidget {
 class _FavouriteViewState extends BaseState<FavouriteView>
     with TickerProviderStateMixin {
   TabController tabController;
+  FavouriteViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseView<FavouriteViewModel>(
       viewModel: FavouriteViewModel(),
-      onModelReady: (model) {
+      onModelReady: (model) async {
         model.setContext(context);
         model.init();
-        tabController = TabController(
-          length: 2,
-          vsync: this,
-        );
+        viewModel = model;
+        await viewModel.fetchFavouriteRecipes(token: widget.token);
       },
       onPageBuilder: (BuildContext context, FavouriteViewModel value) =>
           _buildScaffold,
@@ -40,6 +52,7 @@ class _FavouriteViewState extends BaseState<FavouriteView>
         child: Scaffold(appBar: _buildAppBar, body: _buildBody),
       );
   Widget get _buildAppBar => AppBar(
+      elevation: 0,
       flexibleSpace: Container(
         padding: context.paddingNormal,
         child: Column(
@@ -67,30 +80,40 @@ class _FavouriteViewState extends BaseState<FavouriteView>
           )
         ],
       ));
-  Widget get _buildBody => TabBarView(
-        controller: tabController,
-        children: [
-          Padding(
-            padding: context.paddingNormal,
-            child: _buildRecipeList,
-          ),
-          Padding(
-            padding: context.paddingNormal,
-            child: _buildRecipeList,
-          )
-        ],
+  Widget get _buildBody => Observer(
+        builder: (BuildContext context) => viewModel.isLoading
+            ? Center(
+                child: SecondaryColorCircularProgress(),
+              )
+            : TabBarView(
+                controller: tabController,
+                children: [
+                  Padding(
+                    padding: context.paddingNormal,
+                    child: viewModel.recipeList.isEmpty
+                        ? Center(
+                            child: LocaleText(
+                            value: "noItemsFound",
+                          ))
+                        : _buildRecipeList,
+                  ),
+                  Padding(
+                    padding: context.paddingNormal,
+                    child: _buildRecipeList,
+                  )
+                ],
+              ),
       );
   ListView get _buildRecipeList => ListView.builder(
         shrinkWrap: true,
         itemExtent: context.height / 10,
-        itemCount: 6,
+        itemCount: viewModel.recipeList.length,
         itemBuilder: (_, index) => Column(
           children: [
             _buildRecipeTile(
                 onTap: () {},
-                title: 'Coconut Curry $index',
-                url:
-                    "https://shemins.scdn2.secure.raxcdn.com/wp-content/uploads/2018/02/Shemins-Lucknowi-Biryani.jpg"),
+                title: viewModel.recipeList[index].title,
+                url: viewModel.recipeList[index].imageUrl),
             Divider()
           ],
         ),
