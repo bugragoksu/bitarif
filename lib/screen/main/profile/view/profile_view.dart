@@ -1,7 +1,6 @@
-import 'package:bitarif/core/constants/navigation/navigation_constants.dart';
-import 'package:bitarif/core/init/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
@@ -9,14 +8,19 @@ import '../../../../core/components/card/stack_image_card.dart';
 import '../../../../core/components/column/low_padding_column.dart';
 import '../../../../core/components/img/circle_img.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/card/categorie_recipe_card.dart';
+import '../../../_widgets/secondary_color_circular_progress.dart';
 import '../../../_widgets/tabs/custom_tab.dart';
+import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../viewmodel/profile_view_model.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({Key key}) : super(key: key);
+  final BitarifUser user;
+  const ProfileView({Key key, @required this.user}) : super(key: key);
   @override
   _ProfileViewState createState() => _ProfileViewState();
 }
@@ -42,10 +46,12 @@ class _ProfileViewState extends BaseState<ProfileView>
   Widget build(BuildContext context) {
     return BaseView<ProfileViewModel>(
       viewModel: ProfileViewModel(),
-      onModelReady: (model) {
+      onModelReady: (model) async {
         model.setContext(context);
         model.init();
         viewModel = model;
+        await viewModel.getRecipeList(
+            token: widget.user.token, firebaseId: widget.user.firebaseId);
       },
       onPageBuilder: (BuildContext context, ProfileViewModel value) =>
           _buildScaffold,
@@ -53,11 +59,15 @@ class _ProfileViewState extends BaseState<ProfileView>
   }
 
   Widget get _buildScaffold => SafeArea(
-        child: DefaultTabController(
-            length: 2, child: Scaffold(appBar: _buildAppBar, body: _buildBody)),
-      );
+          child: DefaultTabController(
+        length: 2,
+        child: Observer(
+            builder: (BuildContext context) =>
+                Scaffold(appBar: _buildAppBar, body: _buildBody)),
+      ));
 
   Widget get _buildAppBar => AppBar(
+      elevation: 0,
       flexibleSpace: Container(
         padding: context.paddingNormal,
         child: Row(
@@ -67,8 +77,7 @@ class _ProfileViewState extends BaseState<ProfileView>
               height: context.height / 4.5,
               width: context.width / 3,
               isNetwork: true,
-              path:
-                  "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+              path: widget.user.profilePic,
               child: null,
             ),
             _buildInfoColumn
@@ -94,26 +103,28 @@ class _ProfileViewState extends BaseState<ProfileView>
         children: [
           IconButton(icon: Icon(FeatherIcons.settings), onPressed: () {}),
           context.lowValue.toHeightSizedBox,
-          Text("Buğra Göksu",
+          Text(widget.user.name,
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold)),
           context.lowValue.toHeightSizedBox,
-          Text("bugragoksu2@gmail.com"),
+          Text(widget.user.email),
           context.mediumValue.toHeightSizedBox,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
-                  Text("17", style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text("Books"),
+                  Text(viewModel.recipeList.length.toString(),
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  LocaleText(value: "recipes"),
                 ],
               ),
               context.mediumValue.toWidthSizedBox,
               Column(
                 children: [
-                  Text("73", style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text("Recipes"),
+                  Text(widget.user.follower.length.toString(),
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  LocaleText(value: "followers"),
                 ],
               )
             ],
@@ -125,32 +136,40 @@ class _ProfileViewState extends BaseState<ProfileView>
         children: [_buildRecipeGridTab, _buildFollowersTab],
       );
 
-  Widget get _buildRecipeGridTab => LowPaddingColumn(
-        children: [
-          _buildRecipeTitleRow(
-              title: "myRecipes",
-              icon: FeatherIcons.plusCircle,
-              onPressed: () {
-                NavigationManager.instance
-                    .navigateToPage(path: NavigationConstants.NEW_RECIPE);
-              }),
-          context.lowValue.toHeightSizedBox,
-          _buildRecipeGridView,
-        ],
-      );
+  Widget get _buildRecipeGridTab => viewModel.isLoading
+      ? Center(child: SecondaryColorCircularProgress())
+      : viewModel.recipeList.length == 0
+          ? Center(child: LocaleText(value: 'noItemsFound'))
+          : LowPaddingColumn(
+              children: [
+                _buildRecipeTitleRow(
+                    title: "myRecipes",
+                    icon: FeatherIcons.plusCircle,
+                    onPressed: () {
+                      NavigationManager.instance
+                          .navigateToPage(path: NavigationConstants.NEW_RECIPE);
+                    }),
+                context.lowValue.toHeightSizedBox,
+                _buildRecipeGridView,
+              ],
+            );
 
   Expanded get _buildRecipeGridView => Expanded(
         child: GridView.builder(
-            itemCount: 5,
+            itemCount: viewModel.recipeList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: context.normalValue,
                 mainAxisSpacing: context.normalValue),
             itemBuilder: (BuildContext context, int index) =>
                 CategorieRecipeCard(
-                  path:
-                      "https://static01.nyt.com/images/2020/02/10/dining/onepot-cheesypasta/onepot-cheesypasta-articleLarge.jpg",
-                )),
+                    onPressed: () {
+                      NavigationManager.instance.navigateToPage(
+                          path: NavigationConstants.RECIPE_DETAIL,
+                          data: viewModel.recipeList[index]);
+                    },
+                    path: viewModel.recipeList[index].imageUrl,
+                    category: viewModel.recipeList[index].category[0].name)),
       );
 
   Row _buildRecipeTitleRow(

@@ -51,5 +51,7 @@
     "weakPassword": "The password provided is too weak",
     "userNotFound": "No user found for that email",
     "wrongPassword": "Wrong password provided for that user",
-    "somethingWentWrong": "Something went wrong. Please try again later"
+    "somethingWentWrong": "Something went wrong. Please try again later",
+    "noItemsFound": "It's empty yet"
+
 }

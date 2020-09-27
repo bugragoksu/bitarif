@@ -50,7 +50,7 @@ class _MainViewState extends BaseState<MainView> {
           token: widget.user.token,
         ),
         FavouriteView(token: widget.user.token),
-        ProfileView()
+        ProfileView(user: widget.user,)
       ];
 
   Widget get _buildBody => IndexedStack(children: pages, index: currentIndex);

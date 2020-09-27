@@ -51,5 +51,6 @@
     "weakPassword": "Lütfen daha güçlü bir şifre giriniz",
     "userNotFound": "Bu email adresine kayıtlı bir hesap bulunamadı",
     "wrongPassword": "Şifrenizi yanlış girdiniz",
-    "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz"
+    "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz",
+    "noItemsFound": "Henüz burası boş"
 }

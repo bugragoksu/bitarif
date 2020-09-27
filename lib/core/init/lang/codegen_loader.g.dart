@@ -61,9 +61,14 @@ class CodegenLoader extends AssetLoader{
   "done": "Done",
   "filter": "Filter",
   "recipes": "Recipes",
-  "pleaseEnterEmail": "Please enter an email",
-  "pleaseEnterPassword": "Please enter a password",
-  "pleaseEnterEmailPassword": "Please enter email & password"
+  "pleaseEnterFields": "Please enter blank fields",
+  "emailAlreadyInUse": "The account already exists for that email",
+  "invalidEmail": "Please supply a valid email",
+  "weakPassword": "The password provided is too weak",
+  "userNotFound": "No user found for that email",
+  "wrongPassword": "Wrong password provided for that user",
+  "somethingWentWrong": "Something went wrong. Please try again later",
+  "noItemsFound": "It's empty yet"
 };
 static const Map<String,dynamic> tr = {
   "signIn": "Giriş Yap",
@@ -112,9 +117,14 @@ static const Map<String,dynamic> tr = {
   "done": "Uygula",
   "filter": "Filtre",
   "recipes": "Tarifler",
-  "pleaseEnterEmail": "Lütfen email adresi giriniz",
-  "pleaseEnterPassword": "Lütfen şifre giriniz",
-  "pleaseEnterEmailPassword": "Lütfen email adresi ve şifre giriniz"
+  "pleaseEnterFields": "Lütfen boş alanları doldurunuz",
+  "emailAlreadyInUse": "Bu email zaten kayıtlı",
+  "invalidEmail": "Lütfen geçerli bir email giriniz",
+  "weakPassword": "Lütfen daha güçlü bir şifre giriniz",
+  "userNotFound": "Bu email adresine kayıtlı bir hesap bulunamadı",
+  "wrongPassword": "Şifrenizi yanlış girdiniz",
+  "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz",
+  "noItemsFound": "Henüz burası boş"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "tr": tr};
 }
