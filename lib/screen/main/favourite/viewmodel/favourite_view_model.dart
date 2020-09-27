@@ -79,8 +79,6 @@ abstract class _FavouriteViewModelBase with Store, BaseViewModel {
       this.context.showSnackBar(
           WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
       return [];
-    } finally {
-      isLoading = false;
     }
   }
 
@@ -92,7 +90,6 @@ abstract class _FavouriteViewModelBase with Store, BaseViewModel {
     }
 
     try {
-      isLoading = true;
       List favBlogObjList = [];
       favouriteBlogIdList.forEach((element) {
         if ((element.length != 0))

@@ -6,6 +6,14 @@ class FirebaseResponse {
   FirebaseAuthException exception;
   String errorMessage;
   bool success;
+  bool isNewUser;
+
+  FirebaseResponse(
+      {this.firebaseUser,
+      this.exception,
+      this.errorMessage,
+      this.success,
+      this.isNewUser});
 
   String getErrorMessage() {
     if (this.exception != null) {
@@ -31,6 +39,9 @@ class FirebaseResponse {
         break;
       case 'wrong-password':
         message = "wrongPassword".locale;
+        break;
+      case 'account-exists-with-different-credential':
+        message = "accountExistDiffCred".locale;
         break;
       default:
         message = "somethingWentWrong".locale;

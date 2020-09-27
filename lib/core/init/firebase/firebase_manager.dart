@@ -24,6 +24,7 @@ class FirebaseManager extends IFirebaseManager {
     return response;
   }
 
+  @override
   Future<FirebaseResponse> registerWithEmailAndPassword(
       {String email, String password}) async {
     FirebaseResponse response = FirebaseResponse();
@@ -44,6 +45,7 @@ class FirebaseManager extends IFirebaseManager {
     }
   }
 
+  @override
   Future<FirebaseResponse> signInWithEmailAndPassword(
       {String email, String password}) async {
     FirebaseResponse response = FirebaseResponse();
@@ -62,5 +64,10 @@ class FirebaseManager extends IFirebaseManager {
       response.errorMessage = e.toString();
       return response;
     }
+  }
+
+  @override
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

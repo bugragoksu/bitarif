@@ -10,6 +10,7 @@ import '../../../../core/components/text/no_items_text.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
+import '../../../../core/extensions/list_extension.dart';
 import '../../../../core/extensions/string_extension.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/secondary_color_circular_progress.dart';
@@ -94,13 +95,13 @@ class _FavouriteViewState extends BaseState<FavouriteView>
                 children: [
                   Padding(
                     padding: context.paddingNormal,
-                    child: viewModel.recipeList.isEmpty
+                    child: !viewModel.recipeList.isNotNulAndNotEmpty
                         ? NoItemsText()
                         : _buildList(isRecipe: true),
                   ),
                   Padding(
                     padding: context.paddingNormal,
-                    child: viewModel.blogList.isEmpty
+                    child: !viewModel.blogList.isNotNulAndNotEmpty
                         ? NoItemsText()
                         : _buildList(isRecipe: false),
                   )

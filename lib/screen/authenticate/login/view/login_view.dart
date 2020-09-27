@@ -11,9 +11,7 @@ import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/init/firebase/model/firebase_response.dart';
 import '../../../../core/init/lang/language_manager.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
-import '../../../_widgets/buttons/facebook_sign_button.dart';
 import '../../../_widgets/buttons/forgot_password_button.dart';
-import '../../../_widgets/buttons/google_sign_button.dart';
 import '../../../_widgets/buttons/login_button.dart';
 import '../../../_widgets/fields/auth_text_field.dart';
 import '../../auth/model/bitarif_user.dart';
@@ -98,8 +96,7 @@ class _LoginViewState extends State<LoginView> {
             }
           },
         ),
-        _buildSignInWithText,
-        _buildSocialBtnRow,
+   
         _buildSignupBtn,
         SizedBox(
           height: context.mediumValue,
@@ -143,34 +140,6 @@ class _LoginViewState extends State<LoginView> {
           ),
         ],
       ));
-
-  Widget get _buildSignInWithText => Column(
-        children: <Widget>[
-          SizedBox(height: context.lowValue),
-          LocaleText(
-            value: 'or',
-          ),
-          SizedBox(height: context.lowValue),
-          LocaleText(
-            value: 'signInWith',
-          ),
-        ],
-      );
-
-  Widget get _buildSocialBtnRow => Padding(
-        padding: EdgeInsets.symmetric(vertical: context.mediumValue),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            GoogleSignButton(
-              onCompleted: () {},
-            ),
-            FacebookSignButton(
-              onCompleted: () {},
-            )
-          ],
-        ),
-      );
 
   Widget get _buildSignupBtn => GestureDetector(
         onTap: () => widget.goToRegister(),

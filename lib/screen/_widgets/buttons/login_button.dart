@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../core/components/button/sign_button.dart';
 import '../../../core/constants/enums/preferences_keys_enum.dart';
@@ -32,51 +31,47 @@ class _LoginButtonState extends State<LoginButton> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return Observer(
-        builder: (_) => SignButton(
-              isLoading: widget.viewModel.isLoading,
-              onPressed: () async {
-                FirebaseResponse response = FirebaseResponse();
-                changeLoading();
-                if (widget.email.isNotNulAndNotEmpty &&
-                    widget.password.isNotNulAndNotEmpty) {
-                  response = await FirebaseManager.instance
-                      .signInWithEmailAndPassword(
-                          email: widget.email.trim(),
-                          password: widget.password.trim());
-                  if (response.success) {
-                    final result = await widget.viewModel.loginToDatabase(
-                        email: widget.email.trim(),
-                        password: widget.password.trim().toSha256);
-                    if (result.data is BitarifUser) {
-                      LocaleManager.instance.setStringValue(
-                          PreferencesKeys.PASSWORD,
-                          widget.password.trim().toSha256);
-                      LocaleManager.instance.setStringValue(
-                          PreferencesKeys.EMAIL, widget.email.trim());
-                      widget.onCompleted(response, result.data);
-                    } else {
-                      this.context.showSnackBar(WidgetUtils.instance
-                          .buildSnackBar(context, "somethingWentWrong"));
-                      response.success = false;
-                      widget.onCompleted(response, null);
-                    }
-                  } else {
-                    context.showSnackBar(WidgetUtils.instance
-                        .buildSnackBar(context, response.getErrorMessage()));
-                    response.success = false;
-                    widget.onCompleted(response, null);
-                  }
-                } else {
-                  context.showSnackBar(WidgetUtils.instance
-                      .buildSnackBar(context, "pleaseEnterFields"));
-                  response.success = false;
-                  widget.onCompleted(response, null);
-                }
-                changeLoading();
-              },
-              title: "login",
-            ));
+    return SignButton(
+      isLoading: isLoading,
+      onPressed: () async {
+        FirebaseResponse response = FirebaseResponse();
+        changeLoading();
+        if (widget.email.isNotNulAndNotEmpty &&
+            widget.password.isNotNulAndNotEmpty) {
+          response = await FirebaseManager.instance.signInWithEmailAndPassword(
+              email: widget.email.trim(), password: widget.password.trim());
+          if (response.success) {
+            final result = await widget.viewModel.loginToDatabase(
+                email: widget.email.trim(),
+                password: widget.password.trim().toSha256);
+            if (result?.data is BitarifUser) {
+              LocaleManager.instance.setStringValue(
+                  PreferencesKeys.PASSWORD, widget.password.trim().toSha256);
+              LocaleManager.instance
+                  .setStringValue(PreferencesKeys.EMAIL, widget.email.trim());
+              widget.onCompleted(response, result.data);
+            } else {
+              this.context.showSnackBar(WidgetUtils.instance
+                  .buildSnackBar(context, "somethingWentWrong"));
+              response.success = false;
+              widget.onCompleted(response, null);
+            }
+          } else {
+            context.showSnackBar(WidgetUtils.instance
+                .buildSnackBar(context, response.getErrorMessage()));
+            response.success = false;
+            widget.onCompleted(response, null);
+          }
+        } else {
+          context.showSnackBar(
+              WidgetUtils.instance.buildSnackBar(context, "pleaseEnterFields"));
+          response.success = false;
+          widget.onCompleted(response, null);
+        }
+        changeLoading();
+      },
+      title: "login",
+    );
   }
 
   changeLoading() => setState(() {

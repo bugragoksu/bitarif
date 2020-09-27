@@ -29,9 +29,9 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
 
   @override
   Future<IResponseModel<BitarifUser>> loginToDatabase(
-      {String firebaseId, String email, String password, String name}) {
-    return _$loginToDatabaseAsyncAction.run(() => super.loginToDatabase(
-        firebaseId: firebaseId, email: email, password: password, name: name));
+      {String email, String password}) {
+    return _$loginToDatabaseAsyncAction
+        .run(() => super.loginToDatabase(email: email, password: password));
   }
 
   @override

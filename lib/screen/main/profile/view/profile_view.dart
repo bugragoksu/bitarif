@@ -1,7 +1,9 @@
+import 'package:bitarif/core/init/firebase/firebase_manager.dart';
 import 'package:bitarif/screen/_widgets/texts/body_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
@@ -105,7 +107,12 @@ class _ProfileViewState extends BaseState<ProfileView>
   Widget get _buildInfoColumn => Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          IconButton(icon: Icon(FeatherIcons.settings), onPressed: () {}),
+          IconButton(
+              icon: Icon(FeatherIcons.settings),
+              onPressed: () async {
+                await FirebaseManager.instance.signOut();
+                Phoenix.rebirth(context);
+              }),
           context.lowValue.toHeightSizedBox,
           Text(widget.user.name,
               textAlign: TextAlign.left,
@@ -142,23 +149,23 @@ class _ProfileViewState extends BaseState<ProfileView>
 
   Widget get _buildRecipeGridTab => viewModel.isLoading
       ? Center(child: SecondaryColorCircularProgress())
-      : viewModel.recipeList.length == 0
-          ? NoItemsText()
-          : LowPaddingColumn(
-              children: [
-                BodyTitleText(
-                  icon: FeatherIcons.plusCircle,
-                  text: "myRecipes",
-                  haveIcon: true,
-                  onPressed: () {
-                    NavigationManager.instance
-                        .navigateToPage(path: NavigationConstants.NEW_RECIPE);
-                  },
-                ),
-                context.lowValue.toHeightSizedBox,
-                _buildRecipeGridView,
-              ],
-            );
+      : LowPaddingColumn(
+          children: [
+            BodyTitleText(
+              icon: FeatherIcons.plusCircle,
+              text: "myRecipes",
+              haveIcon: true,
+              onPressed: () {
+                NavigationManager.instance
+                    .navigateToPage(path: NavigationConstants.NEW_RECIPE);
+              },
+            ),
+            context.lowValue.toHeightSizedBox,
+            viewModel.recipeList.length == 0
+                ? NoItemsText()
+                : _buildRecipeGridView,
+          ],
+        );
 
   Expanded get _buildRecipeGridView => Expanded(
         child: GridView.builder(

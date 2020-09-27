@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/app/app_constants.dart';
@@ -20,13 +21,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleManager.preferencesInit();
   await Firebase.initializeApp();
-  runApp(MultiProvider(
-    providers: [...ApplicationProvider.instance.dependItems],
-    child: EasyLocalization(
-        useOnlyLangCode: true,
-        path: ApplicationConstants.LANG_ASSETS_PATH,
-        supportedLocales: LanguageManager.instance.supportedLocales,
-        child: MyApp()),
+  runApp(Phoenix(
+    child: MultiProvider(
+      providers: [...ApplicationProvider.instance.dependItems],
+      child: EasyLocalization(
+          useOnlyLangCode: true,
+          path: ApplicationConstants.LANG_ASSETS_PATH,
+          supportedLocales: LanguageManager.instance.supportedLocales,
+          child: MyApp()),
+    ),
   ));
 }
 

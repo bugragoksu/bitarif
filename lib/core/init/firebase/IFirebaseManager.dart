@@ -6,4 +6,7 @@ abstract class IFirebaseManager {
 
   Future<FirebaseResponse> signInWithEmailAndPassword(
       {String email, String password});
+  FirebaseResponse getCurrentUser();
+
+  Future<void> signOut();
 }

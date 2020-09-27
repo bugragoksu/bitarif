@@ -20,7 +20,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
 
   @action
   Future<IResponseModel<BitarifUser>> loginToDatabase(
-      {String firebaseId, String email, String password, String name}) async {
+      {String email, String password}) async {
     try {
       isLoading = true;
       final result = await this.coreDio.fetch<BitarifUser, BitarifUser>(

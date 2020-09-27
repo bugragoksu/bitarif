@@ -52,5 +52,6 @@
     "userNotFound": "Bu email adresine kayıtlı bir hesap bulunamadı",
     "wrongPassword": "Şifrenizi yanlış girdiniz",
     "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz",
-    "noItemsFound": "Henüz burası boş"
+    "noItemsFound": "Henüz burası boş",
+    "accountExistDiffCred": "Bu hesap başka bir giriş yöntemi ile kayıt edilmiş"
 }
