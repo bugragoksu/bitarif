@@ -5,10 +5,11 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 class BodyTitleText extends StatelessWidget {
   final String text;
   final bool haveIcon;
+  final IconData icon;
   final VoidCallback onPressed;
 
   const BodyTitleText(
-      {Key key, this.text, @required this.haveIcon, this.onPressed})
+      {Key key, this.text, @required this.haveIcon, this.onPressed, this.icon})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class BodyTitleText extends StatelessWidget {
         LocaleText(value: text, style: TextStyle(fontWeight: FontWeight.bold)),
         haveIcon
             ? IconButton(
-                icon: Icon(FeatherIcons.chevronRight),
+                icon: Icon(icon ?? FeatherIcons.chevronRight),
                 onPressed: onPressed,
               )
             : Container()

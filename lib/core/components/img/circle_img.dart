@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../extensions/context_extension.dart';
-
 class CircleImage extends StatelessWidget {
   final String path;
   final bool isNetwork;
@@ -15,12 +13,12 @@ class CircleImage extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
-          height: context.highValue * 1.5,
-          width: context.highValue * 1.25,
+          width: 100,
+          height: 100,
           decoration: new BoxDecoration(
               shape: BoxShape.circle,
               image: new DecorationImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   image: isNetwork ? NetworkImage(path) : AssetImage(path)))),
     );
   }

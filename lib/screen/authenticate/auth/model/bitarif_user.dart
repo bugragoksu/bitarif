@@ -45,18 +45,22 @@ class BitarifUser extends BaseModel {
       );
 }
 
-class Follower {
-  Follower({
-    this.firebaseId,
-  });
+class Follower extends BaseModel {
+  Follower({this.firebaseId, this.profilePic});
 
   final String firebaseId;
+  final String profilePic;
 
   factory Follower.fromJson(Map<String, dynamic> json) => Follower(
         firebaseId: json["firebase_id"],
+        profilePic: json["profile_pic"],
       );
 
   Map<String, dynamic> toJson() => {
         "firebase_id": firebaseId,
+        "profile_pic": profilePic,
       };
+
+  @override
+  fromJson(Map<String, Object> json) => Follower.fromJson(json);
 }

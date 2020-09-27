@@ -6,6 +6,7 @@ import '../../../../core/constants/enums/http_types_enum.dart';
 import '../../../../core/constants/server/server_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/utils/widget_utils.dart';
+import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../../recipe/recipe_detail.dart/model/recipe_model.dart';
 
 part 'profile_view_model.g.dart';
@@ -21,6 +22,36 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
 
   @observable
   List<Recipe> recipeList = [];
+
+  @observable
+  List<Follower> followList = [];
+
+  @action
+  Future<List<Follower>> getFollowList(
+      {String token, String firebaseId}) async {
+    try {
+      isLoading = true;
+      final result = await this.coreDio.fetch<List<Follower>, Follower>(
+          ServerConstants.USER_FOLLOWS_ENDPOINT,
+          token: token,
+          data: {"firebase_id": firebaseId},
+          parseModel: Follower(),
+          type: HttpTypes.POST);
+      if (result.data is List<Follower>) {
+        followList = result.data;
+      } else {
+        this.context.showSnackBar(
+            WidgetUtils.instance.buildSnackBar(context, result.error.message));
+      }
+      return followList;
+    } catch (e) {
+      this.context.showSnackBar(
+          WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
+      return [];
+    } finally {
+      isLoading = false;
+    }
+  }
 
   @action
   Future<List<Recipe>> getRecipeList({String token, String firebaseId}) async {

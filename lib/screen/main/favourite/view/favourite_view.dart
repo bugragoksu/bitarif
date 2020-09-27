@@ -1,5 +1,3 @@
-import 'package:bitarif/core/constants/navigation/navigation_constants.dart';
-import 'package:bitarif/core/init/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -8,9 +6,12 @@ import '../../../../core/base/state/base_state.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/components/card/stack_image_card.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/components/text/no_items_text.dart';
+import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
 import '../../../../core/extensions/string_extension.dart';
+import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/secondary_color_circular_progress.dart';
 import '../viewmodel/favourite_view_model.dart';
 
@@ -94,19 +95,13 @@ class _FavouriteViewState extends BaseState<FavouriteView>
                   Padding(
                     padding: context.paddingNormal,
                     child: viewModel.recipeList.isEmpty
-                        ? Center(
-                            child: LocaleText(
-                            value: "noItemsFound",
-                          ))
+                        ? NoItemsText()
                         : _buildList(isRecipe: true),
                   ),
                   Padding(
                     padding: context.paddingNormal,
                     child: viewModel.blogList.isEmpty
-                        ? Center(
-                            child: LocaleText(
-                            value: "noItemsFound",
-                          ))
+                        ? NoItemsText()
                         : _buildList(isRecipe: false),
                   )
                 ],

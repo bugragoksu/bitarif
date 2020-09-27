@@ -39,6 +39,30 @@ mixin _$ProfileViewModel on _ProfileViewModelBase, Store {
     });
   }
 
+  final _$followListAtom = Atom(name: '_ProfileViewModelBase.followList');
+
+  @override
+  List<Follower> get followList {
+    _$followListAtom.reportRead();
+    return super.followList;
+  }
+
+  @override
+  set followList(List<Follower> value) {
+    _$followListAtom.reportWrite(value, super.followList, () {
+      super.followList = value;
+    });
+  }
+
+  final _$getFollowListAsyncAction =
+      AsyncAction('_ProfileViewModelBase.getFollowList');
+
+  @override
+  Future<List<Follower>> getFollowList({String token, String firebaseId}) {
+    return _$getFollowListAsyncAction
+        .run(() => super.getFollowList(token: token, firebaseId: firebaseId));
+  }
+
   final _$getRecipeListAsyncAction =
       AsyncAction('_ProfileViewModelBase.getRecipeList');
 
@@ -52,7 +76,8 @@ mixin _$ProfileViewModel on _ProfileViewModelBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
-recipeList: ${recipeList}
+recipeList: ${recipeList},
+followList: ${followList}
     ''';
   }
 }

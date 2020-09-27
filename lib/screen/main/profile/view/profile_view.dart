@@ -1,3 +1,4 @@
+import 'package:bitarif/screen/_widgets/texts/body_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -8,6 +9,7 @@ import '../../../../core/components/card/stack_image_card.dart';
 import '../../../../core/components/column/low_padding_column.dart';
 import '../../../../core/components/img/circle_img.dart';
 import '../../../../core/components/text/locale_text.dart';
+import '../../../../core/components/text/no_items_text.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
@@ -51,6 +53,8 @@ class _ProfileViewState extends BaseState<ProfileView>
         model.init();
         viewModel = model;
         await viewModel.getRecipeList(
+            token: widget.user.token, firebaseId: widget.user.firebaseId);
+        await viewModel.getFollowList(
             token: widget.user.token, firebaseId: widget.user.firebaseId);
       },
       onPageBuilder: (BuildContext context, ProfileViewModel value) =>
@@ -139,16 +143,18 @@ class _ProfileViewState extends BaseState<ProfileView>
   Widget get _buildRecipeGridTab => viewModel.isLoading
       ? Center(child: SecondaryColorCircularProgress())
       : viewModel.recipeList.length == 0
-          ? Center(child: LocaleText(value: 'noItemsFound'))
+          ? NoItemsText()
           : LowPaddingColumn(
               children: [
-                _buildRecipeTitleRow(
-                    title: "myRecipes",
-                    icon: FeatherIcons.plusCircle,
-                    onPressed: () {
-                      NavigationManager.instance
-                          .navigateToPage(path: NavigationConstants.NEW_RECIPE);
-                    }),
+                BodyTitleText(
+                  icon: FeatherIcons.plusCircle,
+                  text: "myRecipes",
+                  haveIcon: true,
+                  onPressed: () {
+                    NavigationManager.instance
+                        .navigateToPage(path: NavigationConstants.NEW_RECIPE);
+                  },
+                ),
                 context.lowValue.toHeightSizedBox,
                 _buildRecipeGridView,
               ],
@@ -172,32 +178,17 @@ class _ProfileViewState extends BaseState<ProfileView>
                     category: viewModel.recipeList[index].category[0].name)),
       );
 
-  Row _buildRecipeTitleRow(
-          {String title, IconData icon, VoidCallback onPressed}) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          LocaleText(
-              value: title, style: TextStyle(fontWeight: FontWeight.bold)),
-          IconButton(
-            icon: Icon(icon),
-            onPressed: onPressed,
-            color: context.theme.colorScheme.secondaryVariant,
-          )
-        ],
-      );
-
   Widget get _buildFollowersTab => LowPaddingColumn(children: [
         Expanded(
           child: Column(
             children: [
               context.lowValue.toHeightSizedBox,
-              _buildRecipeTitleRow(
-                  title: "follows",
-                  icon: FeatherIcons.arrowRightCircle,
-                  onPressed: () {}),
+              BodyTitleText(
+                text: "follows",
+                haveIcon: false,
+              ),
               context.lowValue.toHeightSizedBox,
-              _buildUserList()
+              _buildUserList(isFollower: false)
             ],
           ),
         ),
@@ -205,32 +196,34 @@ class _ProfileViewState extends BaseState<ProfileView>
           child: Column(
             children: [
               context.lowValue.toHeightSizedBox,
-              _buildRecipeTitleRow(
-                  title: "followers",
-                  icon: FeatherIcons.arrowRightCircle,
-                  onPressed: () {}),
+              BodyTitleText(
+                text: "followers",
+                haveIcon: false,
+              ),
               context.lowValue.toHeightSizedBox,
-              _buildUserList()
+              _buildUserList(isFollower: true)
             ],
           ),
         ),
       ]);
 
-  Widget _buildUserList() => Expanded(
-        child: ListView.builder(
-          itemCount: 10,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (_, index) => Padding(
-            padding: context.paddingLow,
-            child: CircleImage(
-              onTap: () {
-                print("hell");
-              },
-              isNetwork: true,
-              path:
-                  "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  Widget _buildUserList({bool isFollower}) => widget.user.follower.length == 0
+      ? NoItemsText()
+      : Expanded(
+          child: ListView.builder(
+            itemCount: isFollower
+                ? widget.user.follower.length
+                : viewModel.followList.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) => Padding(
+              padding: context.paddingLow,
+              child: CircleImage(
+                  onTap: () {},
+                  isNetwork: true,
+                  path: isFollower
+                      ? widget.user.follower[index].profilePic
+                      : viewModel.followList[index].profilePic),
             ),
           ),
-        ),
-      );
+        );
 }
