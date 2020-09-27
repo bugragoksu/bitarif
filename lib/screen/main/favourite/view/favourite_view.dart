@@ -1,3 +1,5 @@
+import 'package:bitarif/core/constants/navigation/navigation_constants.dart';
+import 'package:bitarif/core/init/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -42,6 +44,7 @@ class _FavouriteViewState extends BaseState<FavouriteView>
         model.init();
         viewModel = model;
         await viewModel.fetchFavouriteRecipes(token: widget.token);
+        await viewModel.fetchFavouriteBlogs(token: widget.token);
       },
       onPageBuilder: (BuildContext context, FavouriteViewModel value) =>
           _buildScaffold,
@@ -95,31 +98,48 @@ class _FavouriteViewState extends BaseState<FavouriteView>
                             child: LocaleText(
                             value: "noItemsFound",
                           ))
-                        : _buildRecipeList,
+                        : _buildList(isRecipe: true),
                   ),
                   Padding(
                     padding: context.paddingNormal,
-                    child: _buildRecipeList,
+                    child: viewModel.blogList.isEmpty
+                        ? Center(
+                            child: LocaleText(
+                            value: "noItemsFound",
+                          ))
+                        : _buildList(isRecipe: false),
                   )
                 ],
               ),
       );
-  ListView get _buildRecipeList => ListView.builder(
+  ListView _buildList({bool isRecipe}) => ListView.builder(
         shrinkWrap: true,
         itemExtent: context.height / 10,
-        itemCount: viewModel.recipeList.length,
+        itemCount:
+            isRecipe ? viewModel.recipeList.length : viewModel.blogList.length,
         itemBuilder: (_, index) => Column(
           children: [
-            _buildRecipeTile(
-                onTap: () {},
-                title: viewModel.recipeList[index].title,
-                url: viewModel.recipeList[index].imageUrl),
+            _buildTile(
+                onTap: () {
+                  NavigationManager.instance.navigateToPage(
+                      path: isRecipe
+                          ? NavigationConstants.RECIPE_DETAIL
+                          : NavigationConstants.BLOG_DETAIL,
+                      data: isRecipe
+                          ? viewModel.recipeList[index]
+                          : viewModel.blogList[index]);
+                },
+                title: isRecipe
+                    ? viewModel.recipeList[index].title
+                    : viewModel.blogList[index].title,
+                url: isRecipe
+                    ? viewModel.recipeList[index].imageUrl
+                    : viewModel.blogList[index].imageLink),
             Divider()
           ],
         ),
       );
-  Widget _buildRecipeTile({String title, String url, VoidCallback onTap}) =>
-      ListTile(
+  Widget _buildTile({String title, String url, VoidCallback onTap}) => ListTile(
         onTap: onTap,
         contentPadding: EdgeInsets.all(0),
         trailing: IconButton(

@@ -8,4 +8,5 @@ class NavigationConstants {
   static const INSPIRATIONS = "/inspirations";
   static const FILTER = "/filter";
   static const RECIPE_DETAIL = "/recipeDetail";
+  static const BLOG_DETAIL = "/blogDetail";
 }

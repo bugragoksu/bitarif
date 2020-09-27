@@ -1,1 +1,1 @@
-enum PreferencesKeys { EMAIL, PASSWORD,FAV_RECIPES}
+enum PreferencesKeys { EMAIL, PASSWORD,FAV_RECIPES,FAV_BLOGS}

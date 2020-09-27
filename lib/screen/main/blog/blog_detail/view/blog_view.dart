@@ -1,13 +1,14 @@
-import 'package:bitarif/screen/main/blog/blog_detail/model/blog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../../../../core/base/state/base_state.dart';
 import '../../../../../core/base/view/base_view.dart';
 import '../../../../../core/components/column/imaged_start_column.dart';
+import '../../../../../core/constants/enums/preferences_keys_enum.dart';
 import '../../../../../core/extensions/context_extension.dart';
 import '../../../../../core/extensions/date_extension.dart';
 import '../../../../../core/extensions/double_extension.dart';
+import '../../../../../core/init/cache/locale_manager.dart';
+import '../model/blog.dart';
 import '../viewmodel/blog_detail_view_model.dart';
 
 class BlogDetailView extends StatefulWidget {
@@ -60,8 +61,12 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
           children: [
             Text(widget.blog.createdDate.toParsedString),
             IconButton(
-              icon: Icon(FeatherIcons.heart),
-              onPressed: () {},
+              icon: Icon(isFav() ? Icons.favorite : Icons.favorite_border),
+              onPressed: () {
+                setState(() {
+                  isFav() ? delFavList() : addFavList();
+                });
+              },
             )
           ],
         ),
@@ -89,4 +94,41 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
           ],
         ),
       );
+
+  String getFavList() {
+    return LocaleManager.instance.getStringValue(PreferencesKeys.FAV_BLOGS);
+  }
+
+  void addFavList() {
+    String favList = getFavList();
+    favList += "${widget.blog.id},";
+    LocaleManager.instance.setStringValue(PreferencesKeys.FAV_BLOGS, favList);
+  }
+
+  void delFavList() {
+    String favList = getFavList();
+    String newFav = "";
+    List<String> recipeIdList = favList.split(',');
+    for (var i = 0; i < recipeIdList.length; i++) {
+      if (!recipeIdList[i].contains(widget.blog.id.toString())) {
+        newFav += recipeIdList[i] + ",";
+      }
+    }
+    LocaleManager.instance.setStringValue(PreferencesKeys.FAV_BLOGS, newFav);
+  }
+
+  bool isFav() {
+    bool result = false;
+    String favList = getFavList();
+
+    List<String> blogIdList = favList.split(',');
+    for (var i = 0; i < blogIdList.length; i++) {
+      if (blogIdList[i].contains(widget.blog.id.toString())) {
+        result = true;
+        break;
+      }
+    }
+
+    return result;
+  }
 }

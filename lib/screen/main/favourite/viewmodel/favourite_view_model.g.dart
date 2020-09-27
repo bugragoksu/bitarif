@@ -41,6 +41,22 @@ mixin _$FavouriteViewModel on _FavouriteViewModelBase, Store {
     });
   }
 
+  final _$favouriteBlogIdListAtom =
+      Atom(name: '_FavouriteViewModelBase.favouriteBlogIdList');
+
+  @override
+  List<String> get favouriteBlogIdList {
+    _$favouriteBlogIdListAtom.reportRead();
+    return super.favouriteBlogIdList;
+  }
+
+  @override
+  set favouriteBlogIdList(List<String> value) {
+    _$favouriteBlogIdListAtom.reportWrite(value, super.favouriteBlogIdList, () {
+      super.favouriteBlogIdList = value;
+    });
+  }
+
   final _$recipeListAtom = Atom(name: '_FavouriteViewModelBase.recipeList');
 
   @override
@@ -56,6 +72,21 @@ mixin _$FavouriteViewModel on _FavouriteViewModelBase, Store {
     });
   }
 
+  final _$blogListAtom = Atom(name: '_FavouriteViewModelBase.blogList');
+
+  @override
+  List<BlogPost> get blogList {
+    _$blogListAtom.reportRead();
+    return super.blogList;
+  }
+
+  @override
+  set blogList(List<BlogPost> value) {
+    _$blogListAtom.reportWrite(value, super.blogList, () {
+      super.blogList = value;
+    });
+  }
+
   final _$fetchFavouriteRecipesAsyncAction =
       AsyncAction('_FavouriteViewModelBase.fetchFavouriteRecipes');
 
@@ -63,6 +94,15 @@ mixin _$FavouriteViewModel on _FavouriteViewModelBase, Store {
   Future<List<Recipe>> fetchFavouriteRecipes({String token}) {
     return _$fetchFavouriteRecipesAsyncAction
         .run(() => super.fetchFavouriteRecipes(token: token));
+  }
+
+  final _$fetchFavouriteBlogsAsyncAction =
+      AsyncAction('_FavouriteViewModelBase.fetchFavouriteBlogs');
+
+  @override
+  Future<List<BlogPost>> fetchFavouriteBlogs({String token}) {
+    return _$fetchFavouriteBlogsAsyncAction
+        .run(() => super.fetchFavouriteBlogs(token: token));
   }
 
   final _$_FavouriteViewModelBaseActionController =
@@ -80,11 +120,24 @@ mixin _$FavouriteViewModel on _FavouriteViewModelBase, Store {
   }
 
   @override
+  void getFavouriteBlogsIdFromCache() {
+    final _$actionInfo = _$_FavouriteViewModelBaseActionController.startAction(
+        name: '_FavouriteViewModelBase.getFavouriteBlogsIdFromCache');
+    try {
+      return super.getFavouriteBlogsIdFromCache();
+    } finally {
+      _$_FavouriteViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 favouriteRecipeIdList: ${favouriteRecipeIdList},
-recipeList: ${recipeList}
+favouriteBlogIdList: ${favouriteBlogIdList},
+recipeList: ${recipeList},
+blogList: ${blogList}
     ''';
   }
 }

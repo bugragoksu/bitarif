@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../screen/authenticate/auth/model/bitarif_user.dart';
 import '../../../screen/authenticate/auth/view/auth_view.dart';
 import '../../../screen/authenticate/splash/view/splash_view.dart';
+import '../../../screen/main/blog/blog_detail/model/blog.dart';
+import '../../../screen/main/blog/blog_detail/view/blog_view.dart';
 import '../../../screen/main/blog/blog_list/view/blog_list_view.dart';
 import '../../../screen/main/category/category_list/view/category_list_view.dart';
 import '../../../screen/main/category/filter/view/filter_view.dart';
 import '../../../screen/main/main_view.dart';
 import '../../../screen/main/recipe/new_recipe/view/new_recipe_view.dart';
 import '../../../screen/main/recipe/recipe_detail.dart/model/recipe_model.dart';
+import '../../../screen/main/recipe/recipe_detail.dart/view/recipe_detail_view.dart';
 import '../../../screen/main/recipe/recipe_list/view/recipe_list_view.dart';
 import '../../constants/navigation/navigation_constants.dart';
 
@@ -49,6 +52,16 @@ class NavigationRoute {
         break;
       case NavigationConstants.FILTER:
         return normalNavigate(FilterView());
+        break;
+      case NavigationConstants.RECIPE_DETAIL:
+        return normalNavigate(RecipeDetailView(
+          recipe: args.arguments as Recipe,
+        ));
+        break;
+      case NavigationConstants.BLOG_DETAIL:
+        return normalNavigate(BlogDetailView(
+          blog: args.arguments as BlogPost,
+        ));
         break;
       default:
         return MaterialPageRoute(builder: (context) => Scaffold());
