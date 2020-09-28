@@ -8,6 +8,7 @@ import '../../../../core/components/text/link_text.dart';
 import '../../../../core/components/text/locale_text.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/extensions/double_extension.dart';
 import '../../../../core/init/firebase/model/firebase_response.dart';
 import '../../../../core/init/lang/language_manager.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
@@ -80,9 +81,7 @@ class _LoginViewState extends State<LoginView> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(
-          height: context.mediumValue,
-        ),
+        context.mediumValue.toHeightSizedBox,
         buildForm,
         ForgotPasswordButton(),
         LoginButton(
@@ -96,11 +95,9 @@ class _LoginViewState extends State<LoginView> {
             }
           },
         ),
-   
+        context.mediumValue.toHeightSizedBox,
         _buildSignupBtn,
-        SizedBox(
-          height: context.mediumValue,
-        ),
+        context.mediumValue.toHeightSizedBox,
         _buildTermsText,
         Row(
           mainAxisSize: MainAxisSize.min,
@@ -129,9 +126,7 @@ class _LoginViewState extends State<LoginView> {
             controller: emailController,
             icon: Icons.email,
           ),
-          SizedBox(
-            height: context.mediumValue,
-          ),
+          context.mediumValue.toHeightSizedBox,
           AuthTextField(
             isObsureText: true,
             labelText: "password",
@@ -170,12 +165,12 @@ class _LoginViewState extends State<LoginView> {
             child: Column(children: <Widget>[
           LocaleText(value: "agreeTo"),
           LinkText(
-            url: "https://humabreath.com/tos.html",
+            url: "http://google.com/",
             title: "terms",
           ),
           LocaleText(value: "and"),
           LinkText(
-            url: "https://humabreath.com/privacy.html",
+            url: "http://google.com/",
             title: "privacy",
           ),
         ])),
