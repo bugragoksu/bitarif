@@ -53,5 +53,7 @@
     "wrongPassword": "Şifrenizi yanlış girdiniz",
     "somethingWentWrong": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyiniz",
     "noItemsFound": "Henüz burası boş",
-    "accountExistDiffCred": "Bu hesap başka bir giriş yöntemi ile kayıt edilmiş"
+    "accountExistDiffCred": "Bu hesap başka bir giriş yöntemi ile kayıt edilmiş",
+    "successNewRecipe": "Tarifiniz başarıyla eklenmiştir",
+    "failedNewRecipe": "Tarifiniz eklenirken bir sorun oluştu. Lütfen daha sonra tekrar deneyiniz"
 }

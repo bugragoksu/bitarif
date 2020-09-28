@@ -1,5 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 import 'IFirebaseManager.dart';
 import 'model/firebase_response.dart';
 
@@ -69,5 +72,19 @@ class FirebaseManager extends IFirebaseManager {
   @override
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  @override
+  Future<String> uploadImage(File image) async {
+    try {
+      StorageReference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('userImages/${basename(image.path)}');
+      StorageUploadTask uploadTask = storageReference.putFile(image);
+      await uploadTask.onComplete;
+      return await storageReference.getDownloadURL();
+    } catch (e) {
+      return "";
+    }
   }
 }

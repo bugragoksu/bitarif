@@ -39,7 +39,9 @@ class NavigationRoute {
         ));
         break;
       case NavigationConstants.NEW_RECIPE:
-        return normalNavigate(NewRecipeView());
+        return normalNavigate(NewRecipeView(
+          user: args.arguments as BitarifUser,
+        ));
         break;
       case NavigationConstants.CATEGORIES:
         return normalNavigate(

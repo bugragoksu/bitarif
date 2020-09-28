@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'model/firebase_response.dart';
 
 abstract class IFirebaseManager {
@@ -9,4 +11,6 @@ abstract class IFirebaseManager {
   FirebaseResponse getCurrentUser();
 
   Future<void> signOut();
+
+  Future<String> uploadImage(File image);
 }

@@ -53,5 +53,7 @@
     "wrongPassword": "Wrong password provided for that user",
     "somethingWentWrong": "Something went wrong. Please try again later",
     "noItemsFound": "It's empty yet",
-    "accountExistDiffCred": "Account exists with different sign method"
+    "accountExistDiffCred": "Account exists with different sign method",
+    "successNewRecipe": "Your recipe has been successfully added",
+    "failedNewRecipe": "There was a problem adding your recipe. Please try again later"
 }

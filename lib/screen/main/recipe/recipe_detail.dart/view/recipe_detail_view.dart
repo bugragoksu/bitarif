@@ -65,16 +65,7 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
             widget: Container(
                 alignment: Alignment.centerLeft,
                 padding: context.paddingLow,
-                child: ListView.builder(
-                    padding: EdgeInsets.all(0),
-                    shrinkWrap: true,
-                    itemCount: widget.recipe.ingredients.length,
-                    itemBuilder: (_, index) => Text(
-                        widget.recipe.ingredients[index].quantity.amount +
-                            " " +
-                            widget.recipe.ingredients[index].quantity.name +
-                            " " +
-                            widget.recipe.ingredients[index].name))),
+                child: Text(widget.recipe.ingredients)),
           ),
         ),
         context.lowValue.toHeightSizedBox,

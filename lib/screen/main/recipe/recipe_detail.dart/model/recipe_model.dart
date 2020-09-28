@@ -33,7 +33,7 @@ class Recipe extends BaseModel {
   final BitarifUser user;
   final List<Category> category;
   final Difficulty difficulty;
-  final List<Ingredient> ingredients;
+  final String ingredients;
   final String title;
   final String desc;
   final String imageUrl;
@@ -48,8 +48,7 @@ class Recipe extends BaseModel {
         category: List<Category>.from(
             json["category"].map((x) => Category.fromJson(x))),
         difficulty: Difficulty.fromJson(json["difficulty"]),
-        ingredients: List<Ingredient>.from(
-            json["ingredients"].map((x) => Ingredient.fromJson(x))),
+        ingredients: json["ingredients"],
         title: json["title"],
         desc: json["desc"],
         imageUrl: json["image_url"],
@@ -64,7 +63,7 @@ class Recipe extends BaseModel {
         "user": user.toJson(),
         "category": List<dynamic>.from(category.map((x) => x.toJson())),
         "difficulty": difficulty.toJson(),
-        "ingredients": List<dynamic>.from(ingredients.map((x) => x.toJson())),
+        "ingredients": ingredients,
         "title": title,
         "desc": desc,
         "image_url": imageUrl,
@@ -126,56 +125,4 @@ class Difficulty extends BaseModel {
       };
   @override
   fromJson(Map<String, Object> json) => Difficulty.fromJson(json);
-}
-
-class Ingredient extends BaseModel {
-  Ingredient({
-    this.id,
-    this.quantity,
-    this.name,
-  });
-
-  final int id;
-  final Quantity quantity;
-  final String name;
-
-  factory Ingredient.fromJson(Map<String, dynamic> json) => Ingredient(
-        id: json["id"],
-        quantity: Quantity.fromJson(json["quantity"]),
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "quantity": quantity.toJson(),
-        "name": name,
-      };
-  @override
-  fromJson(Map<String, Object> json) => Ingredient.fromJson(json);
-}
-
-class Quantity extends BaseModel {
-  Quantity({
-    this.id,
-    this.name,
-    this.amount,
-  });
-
-  final int id;
-  final String name;
-  final String amount;
-
-  factory Quantity.fromJson(Map<String, dynamic> json) => Quantity(
-        id: json["id"],
-        name: json["name"],
-        amount: json["amount"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "amount": amount,
-      };
-  @override
-  fromJson(Map<String, Object> json) => Quantity.fromJson(json);
 }

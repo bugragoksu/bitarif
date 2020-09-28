@@ -156,8 +156,9 @@ class _ProfileViewState extends BaseState<ProfileView>
               text: "myRecipes",
               haveIcon: true,
               onPressed: () {
-                NavigationManager.instance
-                    .navigateToPage(path: NavigationConstants.NEW_RECIPE);
+                NavigationManager.instance.navigateToPage(
+                    path: NavigationConstants.NEW_RECIPE,
+                    data: widget.user);
               },
             ),
             context.lowValue.toHeightSizedBox,
