@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:bitarif/core/init/firebase/firebase_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/base/model/base_view_model.dart';
@@ -74,6 +78,49 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
       this.context.showSnackBar(
           WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
       return [];
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  @observable
+  File selectedImageFile;
+
+  @action
+  Future getImage({String token, String firebaseId}) async {
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      selectedImageFile = File(pickedFile.path);
+      final imageLink =
+          await FirebaseManager.instance.uploadImage(selectedImageFile);
+      updateUserImage(
+          firebaseId: firebaseId, token: token, imageLink: imageLink);
+    }
+  }
+
+  @action
+  Future<BitarifUser> updateUserImage(
+      {String token, String firebaseId, String imageLink}) async {
+    try {
+      isLoading = true;
+      final result = await this.coreDio.fetch<BitarifUser, BitarifUser>(
+          ServerConstants.UPDATE_USER_IMAGE_ENDPOINT,
+          token: token,
+          data: {"firebase_id": firebaseId, "image_url": imageLink},
+          parseModel: BitarifUser(),
+          type: HttpTypes.POST);
+      if (result?.data is BitarifUser) {
+        return result.data;
+      } else {
+        this.context.showSnackBar(
+            WidgetUtils.instance.buildSnackBar(context, result.error.message));
+      }
+      return null;
+    } catch (e) {
+      this.context.showSnackBar(
+          WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
+      return null;
     } finally {
       isLoading = false;
     }

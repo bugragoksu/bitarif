@@ -90,7 +90,7 @@ class _BlogDetailViewState extends BaseState<BlogDetailView> {
                     fontWeight: FontWeight.w600,
                     fontSize: context.normalValue)),
             context.lowValue.toHeightSizedBox,
-            Text("by Mimi Thorisson")
+            Text("by " + widget.blog.author.name)
           ],
         ),
       );

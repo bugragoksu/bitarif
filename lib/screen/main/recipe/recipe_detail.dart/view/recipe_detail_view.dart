@@ -83,9 +83,18 @@ class _RecipeDetailViewState extends BaseState<RecipeDetailView> {
 
   Widget get _buildRecipeTitle => Padding(
         padding: context.paddingNormal,
-        child: Text(widget.recipe.title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: context.mediumValue)),
+        child: Column(
+          children: [
+            Text(widget.recipe.title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.mediumValue)),
+            Text("by " + widget.recipe.user.name,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.w600, fontSize: context.normalValue))
+          ],
+        ),
       );
 }

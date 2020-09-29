@@ -25,11 +25,11 @@ class SearchBarRow extends StatelessWidget {
             controller: searchFieldController,
           ),
         ),
-        context.lowValue.toWidthSizedBox,
-        Expanded(
-          flex: 1,
-          child: FilterButton(),
-        ),
+        // context.lowValue.toWidthSizedBox,
+        // Expanded(
+        //   flex: 1,
+        //   child: FilterButton(),
+        // ),
       ],
     );
   }

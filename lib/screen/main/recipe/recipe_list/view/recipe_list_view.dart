@@ -65,10 +65,10 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
                   isVisibleDoneText: false,
                   title: widget.title,
                 ),
-                SearchBarRow(
-                  onEditingComplete: () {},
-                  searchFieldController: _searchFieldController,
-                ),
+                // SearchBarRow(
+                //   onEditingComplete: () {},
+                //   searchFieldController: _searchFieldController,
+                // ),
                 context.normalValue.toHeightSizedBox,
                 _buildRecipes
               ],

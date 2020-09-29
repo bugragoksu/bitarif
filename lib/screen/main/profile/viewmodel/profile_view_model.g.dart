@@ -54,6 +54,22 @@ mixin _$ProfileViewModel on _ProfileViewModelBase, Store {
     });
   }
 
+  final _$selectedImageFileAtom =
+      Atom(name: '_ProfileViewModelBase.selectedImageFile');
+
+  @override
+  File get selectedImageFile {
+    _$selectedImageFileAtom.reportRead();
+    return super.selectedImageFile;
+  }
+
+  @override
+  set selectedImageFile(File value) {
+    _$selectedImageFileAtom.reportWrite(value, super.selectedImageFile, () {
+      super.selectedImageFile = value;
+    });
+  }
+
   final _$getFollowListAsyncAction =
       AsyncAction('_ProfileViewModelBase.getFollowList');
 
@@ -72,12 +88,31 @@ mixin _$ProfileViewModel on _ProfileViewModelBase, Store {
         .run(() => super.getRecipeList(token: token, firebaseId: firebaseId));
   }
 
+  final _$getImageAsyncAction = AsyncAction('_ProfileViewModelBase.getImage');
+
+  @override
+  Future<dynamic> getImage({String token, String firebaseId}) {
+    return _$getImageAsyncAction
+        .run(() => super.getImage(token: token, firebaseId: firebaseId));
+  }
+
+  final _$updateUserImageAsyncAction =
+      AsyncAction('_ProfileViewModelBase.updateUserImage');
+
+  @override
+  Future<BitarifUser> updateUserImage(
+      {String token, String firebaseId, String imageLink}) {
+    return _$updateUserImageAsyncAction.run(() => super.updateUserImage(
+        token: token, firebaseId: firebaseId, imageLink: imageLink));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 recipeList: ${recipeList},
-followList: ${followList}
+followList: ${followList},
+selectedImageFile: ${selectedImageFile}
     ''';
   }
 }

@@ -1,5 +1,3 @@
-import 'package:bitarif/core/init/firebase/firebase_manager.dart';
-import 'package:bitarif/screen/_widgets/texts/body_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -15,10 +13,12 @@ import '../../../../core/components/text/no_items_text.dart';
 import '../../../../core/constants/navigation/navigation_constants.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/extensions/double_extension.dart';
+import '../../../../core/init/firebase/firebase_manager.dart';
 import '../../../../core/init/navigation/navigation_manager.dart';
 import '../../../_widgets/card/categorie_recipe_card.dart';
 import '../../../_widgets/secondary_color_circular_progress.dart';
 import '../../../_widgets/tabs/custom_tab.dart';
+import '../../../_widgets/texts/body_title_text.dart';
 import '../../../authenticate/auth/model/bitarif_user.dart';
 import '../viewmodel/profile_view_model.dart';
 
@@ -79,13 +79,27 @@ class _ProfileViewState extends BaseState<ProfileView>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            StackImageCard(
-              height: context.height / 4.5,
-              width: context.width / 3,
-              isNetwork: true,
-              path: widget.user.profilePic,
-              child: null,
-            ),
+            Observer(builder: (_) {
+              return StackImageCard(
+                height: context.height / 4.5,
+                width: context.width / 3,
+                isNetwork: viewModel.selectedImageFile != null ? false : true,
+                isFile: viewModel.selectedImageFile != null ? true : false,
+                imageFile: viewModel.selectedImageFile,
+                path: widget.user.profilePic,
+                child: Positioned(
+                  top: -context.lowValue * 2.5,
+                  right: -context.lowValue * 2.5,
+                  child: IconButton(
+                      icon: Icon(FeatherIcons.edit2),
+                      onPressed: () async {
+                        await viewModel.getImage(
+                            firebaseId: widget.user.firebaseId,
+                            token: widget.user.token);
+                      }),
+                ),
+              );
+            }),
             _buildInfoColumn
           ],
         ),
@@ -108,7 +122,7 @@ class _ProfileViewState extends BaseState<ProfileView>
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           IconButton(
-              icon: Icon(FeatherIcons.settings),
+              icon: Icon(FeatherIcons.logOut),
               onPressed: () async {
                 await FirebaseManager.instance.signOut();
                 Phoenix.rebirth(context);
@@ -157,8 +171,7 @@ class _ProfileViewState extends BaseState<ProfileView>
               haveIcon: true,
               onPressed: () {
                 NavigationManager.instance.navigateToPage(
-                    path: NavigationConstants.NEW_RECIPE,
-                    data: widget.user);
+                    path: NavigationConstants.NEW_RECIPE, data: widget.user);
               },
             ),
             context.lowValue.toHeightSizedBox,
