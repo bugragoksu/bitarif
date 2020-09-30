@@ -109,6 +109,8 @@ class _SearchViewState extends BaseState<SearchView> {
               NavigationManager.instance.navigateToPage(
                   path: NavigationConstants.RECIPE_LIST_VIEW,
                   data: {
+                    "token": widget.token,
+                    "isCategory": true,
                     "search": viewModel.categoryList[index].name,
                     "title": viewModel.categoryList[index].name
                   });
@@ -123,7 +125,10 @@ class _SearchViewState extends BaseState<SearchView> {
           onPressed: () {
             NavigationManager.instance.navigateToPage(
                 path: NavigationConstants.CATEGORIES,
-                data: viewModel.categoryList);
+                data: {
+                  "categoryList": viewModel.categoryList,
+                  "token": widget.token
+                });
           },
           text: "allCategories",
         ),

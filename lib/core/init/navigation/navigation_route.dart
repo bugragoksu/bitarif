@@ -34,8 +34,10 @@ class NavigationRoute {
         break;
       case NavigationConstants.RECIPE_LIST_VIEW:
         return normalNavigate(RecipeListView(
+          isCategory: args.arguments["isCategory"] as bool ?? false,
           title: args.arguments["title"] as String,
           searchValue: args.arguments["search"] as String,
+          token: args.arguments["token"] as String,
         ));
         break;
       case NavigationConstants.NEW_RECIPE:
@@ -44,8 +46,10 @@ class NavigationRoute {
         ));
         break;
       case NavigationConstants.CATEGORIES:
-        return normalNavigate(
-            CategoryListView(categoryList: args.arguments as List<Category>));
+        return normalNavigate(CategoryListView(
+          categoryList: args.arguments["categoryList"] as List<Category>,
+          token: args.arguments["token"] as String,
+        ));
         break;
       case NavigationConstants.INSPIRATIONS:
         return normalNavigate(BlogListView(

@@ -14,8 +14,10 @@ import '../viewmodel/category_list_view_model.dart';
 
 class CategoryListView extends StatefulWidget {
   final List<Category> categoryList;
+  final String token;
 
-  const CategoryListView({Key key, @required this.categoryList})
+  const CategoryListView(
+      {Key key, @required this.categoryList, @required this.token})
       : super(key: key);
   @override
   _CategoryListViewState createState() => _CategoryListViewState();
@@ -66,6 +68,8 @@ class _CategoryListViewState extends BaseState<CategoryListView> {
               NavigationManager.instance.navigateToPage(
                   path: NavigationConstants.RECIPE_LIST_VIEW,
                   data: {
+                    "token": widget.token,
+                    "isCategory": true,
                     "search": widget.categoryList[index].name,
                     "title": widget.categoryList[index].name
                   });

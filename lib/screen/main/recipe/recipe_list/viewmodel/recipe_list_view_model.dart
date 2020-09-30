@@ -17,9 +17,14 @@ abstract class _RecipeListViewModelBase with Store, BaseViewModel {
   void init() {}
 
   String _searchValue;
+  bool isCategory;
 
   set search(String value) {
     this._searchValue = value;
+  }
+
+  void setIsCategory(bool value) {
+    isCategory = value;
   }
 
   @observable
@@ -33,11 +38,14 @@ abstract class _RecipeListViewModelBase with Store, BaseViewModel {
     try {
       isLoading = true;
       final result = await this.coreDio.fetch<List<Recipe>, Recipe>(
-          ServerConstants.RECIPE_LIST_ENDPOINT,
+          isCategory
+              ? ServerConstants.RECIPE_LIST_BY_CATEGORY_ENDPOINT
+              : ServerConstants.RECIPE_LIST_ENDPOINT,
           token: token,
-          queryParameters: {"search": this._searchValue},
+          data: isCategory ? {"category_name": this._searchValue} : null,
+          queryParameters: isCategory ? null : {"search": this._searchValue},
           parseModel: Recipe(),
-          type: HttpTypes.GET);
+          type: isCategory?HttpTypes.POST:HttpTypes.GET);
       if (result.data is List<Recipe>) {
         recipeList = result.data;
       } else {

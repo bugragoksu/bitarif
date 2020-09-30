@@ -13,10 +13,17 @@ import '../../../../_widgets/container/animated_recipe_card.dart';
 import '../viewmodel/recipe_list_view_model.dart';
 
 class RecipeListView extends StatefulWidget {
+  final bool isCategory;
   final String title;
   final String searchValue;
+  final String token;
 
-  const RecipeListView({Key key, @required this.title, this.searchValue})
+  const RecipeListView(
+      {Key key,
+      @required this.title,
+      this.searchValue,
+      this.isCategory,
+      @required this.token})
       : super(key: key);
   @override
   _RecipeListViewState createState() => _RecipeListViewState();
@@ -49,7 +56,8 @@ class _RecipeListViewState extends BaseState<RecipeListView> {
           if (widget.searchValue != null) {
             viewModel.search = widget.searchValue;
           }
-          await viewModel.getRecipeList();
+          viewModel.setIsCategory(widget.isCategory);
+          await viewModel.getRecipeList(token: widget.token);
         },
         onPageBuilder: (BuildContext context, RecipeListViewModel value) =>
             _buildScaffold);
