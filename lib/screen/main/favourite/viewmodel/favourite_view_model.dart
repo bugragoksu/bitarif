@@ -79,6 +79,8 @@ abstract class _FavouriteViewModelBase with Store, BaseViewModel {
       this.context.showSnackBar(
           WidgetUtils.instance.buildSnackBar(context, "somethingWentWrong"));
       return [];
+    }finally{
+      isLoading=false;
     }
   }
 
