@@ -1,19 +1,18 @@
-import 'package:bitarif/core/constants/enums/preferences_keys_enum.dart';
-import 'package:bitarif/core/extensions/double_extension.dart';
-import 'package:bitarif/core/init/cache/locale_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/card/stack_image_card.dart';
+import '../../../core/constants/enums/preferences_keys_enum.dart';
 import '../../../core/extensions/context_extension.dart';
+import '../../../core/extensions/double_extension.dart';
+import '../../../core/init/cache/locale_manager.dart';
+import '../../main/recipe/recipe_detail.dart/model/recipe_model.dart';
 
 class RecipeCard extends StatefulWidget {
-  final String path;
-  final int recipeId;
+  final Recipe recipe;
 
   const RecipeCard({
     Key key,
-    @required this.path,
-    @required this.recipeId,
+    @required this.recipe,
   }) : super(key: key);
 
   @override
@@ -30,7 +29,7 @@ class _RecipeCardState extends State<RecipeCard> {
           isNetwork: true,
           height: context.height / 4,
           width: context.width / 2,
-          path: widget.path,
+          path: widget.recipe.imageUrl,
           child: Positioned(
             left: 0,
             right: context.lowValue,
@@ -44,11 +43,11 @@ class _RecipeCardState extends State<RecipeCard> {
                   iconSize: 18,
                   onPressed: () {
                     setState(() {
-                      isFav()?delFavList():addFavList();
+                      isFav() ? delFavList() : addFavList();
                     });
                   },
                 ),
-                Text("45 Min",
+                Text(widget.recipe.time,
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: context.theme.colorScheme.background))
@@ -60,7 +59,7 @@ class _RecipeCardState extends State<RecipeCard> {
         Container(
           width: context.width / 2,
           child: Text(
-            'Apple granola with cinnamon',
+            widget.recipe.title,
             overflow: TextOverflow.clip,
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
@@ -75,7 +74,7 @@ class _RecipeCardState extends State<RecipeCard> {
 
   void addFavList() {
     String favList = getFavList();
-    favList += "${widget.recipeId},";
+    favList += "${widget.recipe.id},";
     LocaleManager.instance.setStringValue(PreferencesKeys.FAV_RECIPES, favList);
   }
 
@@ -84,7 +83,7 @@ class _RecipeCardState extends State<RecipeCard> {
     String newFav = "";
     List<String> recipeIdList = favList.split(',');
     for (var i = 0; i < recipeIdList.length; i++) {
-      if (!recipeIdList[i].contains(widget.recipeId.toString())) {
+      if (!recipeIdList[i].contains(widget.recipe.id.toString())) {
         newFav += recipeIdList[i] + ",";
       }
     }
@@ -97,7 +96,7 @@ class _RecipeCardState extends State<RecipeCard> {
 
     List<String> recipeIdList = favList.split(',');
     for (var i = 0; i < recipeIdList.length; i++) {
-      if (recipeIdList[i].contains(widget.recipeId.toString())) {
+      if (recipeIdList[i].contains(widget.recipe.id.toString())) {
         result = true;
         break;
       }

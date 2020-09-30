@@ -10,7 +10,6 @@ import '../../../../../core/extensions/double_extension.dart';
 import '../../../../_widgets/circular_prgress_with_scaffold.dart';
 import '../../../../_widgets/columns/three_widget_title.dart';
 import '../../../../_widgets/container/animated_recipe_card.dart';
-import '../../../../_widgets/rows/search_bar_row.dart';
 import '../viewmodel/recipe_list_view_model.dart';
 
 class RecipeListView extends StatefulWidget {

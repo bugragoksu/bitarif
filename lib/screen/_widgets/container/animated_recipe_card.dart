@@ -13,8 +13,7 @@ class AnimatedRecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedOpenContainer(
       closeWidget: RecipeCard(
-        path: recipe.imageUrl,
-        recipeId: recipe.id,
+        recipe: recipe,
       ),
       openWidget: RecipeDetailView(recipe: recipe),
     );

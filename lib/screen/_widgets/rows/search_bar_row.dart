@@ -1,8 +1,5 @@
-import 'package:bitarif/screen/_widgets/buttons/filter_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/extensions/context_extension.dart';
-import '../../../core/extensions/double_extension.dart';
 import '../fields/search_field.dart';
 
 class SearchBarRow extends StatelessWidget {
