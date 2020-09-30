@@ -1,3 +1,4 @@
+import 'package:bitarif/core/constants/app/app_constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -165,12 +166,12 @@ class _LoginViewState extends State<LoginView> {
             child: Column(children: <Widget>[
           LocaleText(value: "agreeTo"),
           LinkText(
-            url: "http://google.com/",
+            url: ApplicationConstants.TERMS_LINK,
             title: "terms",
           ),
           LocaleText(value: "and"),
           LinkText(
-            url: "http://google.com/",
+            url: ApplicationConstants.PRIVACY_LINK,
             title: "privacy",
           ),
         ])),

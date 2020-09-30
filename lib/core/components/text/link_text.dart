@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'locale_text.dart';
 
@@ -12,7 +13,7 @@ class LinkText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(url);
+        launch(url);
       },
       child: LocaleText(
           value: title,
