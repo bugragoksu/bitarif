@@ -101,7 +101,11 @@ class _HomeViewState extends BaseState<HomeView> {
             onPressed: () {
               NavigationManager.instance.navigateToPage(
                   path: NavigationConstants.RECIPE_LIST_VIEW,
-                  data: {"search": "", "title": "allRecipes"});
+                  data: {
+                    "search": "",
+                    "title": "allRecipes",
+                    "token": widget.user.token
+                  });
             }),
         Container(
           height: context.height / 3,

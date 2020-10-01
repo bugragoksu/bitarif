@@ -45,7 +45,7 @@ abstract class _RecipeListViewModelBase with Store, BaseViewModel {
           data: isCategory ? {"category_name": this._searchValue} : null,
           queryParameters: isCategory ? null : {"search": this._searchValue},
           parseModel: Recipe(),
-          type: isCategory?HttpTypes.POST:HttpTypes.GET);
+          type: isCategory ? HttpTypes.POST : HttpTypes.GET);
       if (result.data is List<Recipe>) {
         recipeList = result.data;
       } else {

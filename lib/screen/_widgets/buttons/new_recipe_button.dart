@@ -47,6 +47,7 @@ class _NewRecipeButtonState extends BaseState<NewRecipeButton> {
     return SignButton(
       isLoading: isLoading,
       onPressed: () async {
+        changeLoading();
         if (widget.category.isNotNulAndNotEmpty &&
             widget.desc.isNotNulAndNotEmpty &&
             widget.difficulty.isNotNulAndNotEmpty &&

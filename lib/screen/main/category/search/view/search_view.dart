@@ -138,7 +138,7 @@ class _SearchViewState extends BaseState<SearchView> {
           onPressed: () {
             NavigationManager.instance.navigateToPage(
                 path: NavigationConstants.RECIPE_LIST_VIEW,
-                data: {"search": "", "title": "allRecipes"});
+                data: {"search": "", "title": "allRecipes","token": widget.token});
           },
           text: "allRecipes",
         ),

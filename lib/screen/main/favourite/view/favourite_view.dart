@@ -24,10 +24,10 @@ class FavouriteView extends StatefulWidget {
 }
 
 class _FavouriteViewState extends BaseState<FavouriteView>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin { 
   TabController tabController;
   FavouriteViewModel viewModel;
-
+   
   @override
   void initState() {
     super.initState();
