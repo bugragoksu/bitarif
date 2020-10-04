@@ -6,6 +6,8 @@
 [![Made-with-Dart](https://img.shields.io/badge/Made%20with-Dart-13589c.svg)](https://dart.dev/)
 
 bitarif is a recipe application made with Flutter
+* <a href="https://github.com/VB10/flutter-architecture-template">Structure</a>
+* <a href="https://www.behance.net/gallery/74143841/Recipe-App-IOS">Design</a>
 # Download 
 
 <a href="https://play.google.com/store/apps/details?id=com.bugragoksu.bitarif" target="_blank" ><img alt='Get it on Google Play' width="300" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
