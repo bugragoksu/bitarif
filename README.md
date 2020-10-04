@@ -1,16 +1,29 @@
+<p align="center"><img src="asset/img/logo_yazi.png" alt="bitarif"/></p>
+
+
 # bitarif
+[![Made-with-Flutter](https://img.shields.io/badge/Made%20with-Flutter-5fc9f8.svg)](https://flutter.dev/)
+[![Made-with-Dart](https://img.shields.io/badge/Made%20with-Dart-13589c.svg)](https://dart.dev/)
 
-A new Flutter project.
+bitarif is a recipe application made with Flutter
+# Download 
 
-## Getting Started
+<a href="https://play.google.com/store/apps/details?id=com.bugragoksu.bitarif" target="_blank" ><img alt='Get it on Google Play' width="300" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
+<table>
+    <tr>
+        <td><img src="screenshot/0.png" width="300"></td>
+        <td><img src="screenshot/1.png" width="300"></td>
+        <td><img src="screenshot/2.png" width="300"></td>
+    </tr>
+      <tr>
+        <td><img src="screenshot/3.png" width="300"></td>
+        <td><img src="screenshot/4.png" width="300"></td>
+        <td><img src="screenshot/5.png" width="300"></td>
+    </tr>
+</table>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🤓 Author
+**Buğra Göksu** [![Twitter Follow](https://img.shields.io/twitter/follow/bugragoksu.svg?style=social)](https://twitter.com/bugragoksu)
